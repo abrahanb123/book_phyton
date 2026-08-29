@@ -393,7 +393,7 @@
 <h2>1. Carga y Preparación de Datos<a class="headerlink" href="#carga-y-preparacion-de-datos" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span><span class="o">=</span><span class="sa">r</span><span class="s2">"Data\diabetes_binary_5050split_health_indicators_BRFSS2015.csv"</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span><span class="o">=</span><span class="sa">r</span><span class="s2">"C:\Users\abrah\OneDrive - Universidad del Norte\Documentos\DataViz_2026\python\data\diabetes.csv"</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">','</span><span class="p">)</span>
 
@@ -434,6 +434,173 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Diabetes</th>
+      <th>PA_alta</th>
+      <th>col_alto</th>
+      <th>CheckCol</th>
+      <th>IMC</th>
+      <th>Fumador</th>
+      <th>derrame</th>
+      <th>EnfCardi</th>
+      <th>ActFisi</th>
+      <th>fruta</th>
+      <th>...</th>
+      <th>eps</th>
+      <th>AfordabilidadMedica</th>
+      <th>SaludG</th>
+      <th>SaludM</th>
+      <th>SaludF</th>
+      <th>DificultadCaminar</th>
+      <th>Genero</th>
+      <th>Edad</th>
+      <th>Educacion</th>
+      <th>Ingresos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>26.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>5.0</td>
+      <td>30.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>6.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>26.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>12.0</td>
+      <td>6.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>26.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>10.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>13.0</td>
+      <td>6.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>28.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>11.0</td>
+      <td>6.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>29.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>8.0</td>
+      <td>5.0</td>
+      <td>8.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 22 columns</p>
+</div></div></div>
 </div>
 </section>
 <section id="variables-categoricas">
@@ -524,6 +691,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/b474dd84ce2f6e84d710d842fc8ad320ceaffcf11a5979a3cffcce812676c54c.png" src="../_images/b474dd84ce2f6e84d710d842fc8ad320ceaffcf11a5979a3cffcce812676c54c.png" />
+</div>
 </div>
 <p>Este gráfico muestra la distribución de los pacientes con y sin diabetes, confirmando que tiene distribucion igual.</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">PA_alta</span></code>): Corresponde a la variable que nos dice si el paciente cuenta con presion arterial alta o no.</p>
@@ -611,6 +781,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/821e418e9f67868149232286948713a2a1d329eea3592b2675754bec8d95522e.png" src="../_images/821e418e9f67868149232286948713a2a1d329eea3592b2675754bec8d95522e.png" />
+</div>
 </div>
 <p>Como podemos observar en la tabla, el 56.3% de los participantes en esta base de datos balanceada reportan haber sido diagnosticados con presión arterial alta, mientras que el 43.7% no tienen esta condición.</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">col_alto</span></code>): Esta variable corresponde a si el paciente cuenta con un colesterol alto o no.</p>
@@ -664,6 +837,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/dc57265f5f47e995b44f1efee7707a7a2c78c1d0d8a380abbea92ec2f91c25cb.png" src="../_images/dc57265f5f47e995b44f1efee7707a7a2c78c1d0d8a380abbea92ec2f91c25cb.png" />
+</div>
 </div>
 <p>La tabla indica que hay una proporción ligeramente mayor de personas diagnosticadas con colesterol alto (52.6%) en comparación con aquellas que no lo padecen (47.4%).</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">CheckCol</span></code>): Esta variable nos dice si el paciente se realizo examenes que chequeen su colesterol en los ultimos 5 años.</p>
@@ -678,6 +854,13 @@
 <span class="p">)</span>
 <span class="n">tabla_checkcol</span><span class="p">[</span><span class="s1">'Porcentaje'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">tabla_checkcol</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span> <span class="o">/</span> <span class="n">tabla_checkcol</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">tabla_checkcol</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   CheckCol  Frecuencia  Porcentaje
+0       1.0       67317        97.5
+1       0.0        1740         2.5
 </pre></div>
 </div>
 </div>
@@ -707,6 +890,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/51683525549e91234bc1c6f4a3fc265ad6b84d2b09d5c5e705e7e73cd1224dd7.png" src="../_images/51683525549e91234bc1c6f4a3fc265ad6b84d2b09d5c5e705e7e73cd1224dd7.png" />
+</div>
 </div>
 <p>Como podemos observar, la inmensa mayoría de las personas en esta base de datos (97.5%) sí se han realizado un chequeo de colesterol recientemente, mientras que solamente el 2.5% no se ha chequeado en los ultimos 5 años.</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">Fumador</span></code>): Nos dice si el paciente fuma o no.</p>
@@ -723,6 +909,13 @@
 
 
 <span class="nb">print</span><span class="p">(</span><span class="n">tabla_fumador</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Fumador  Frecuencia  Porcentaje
+0      0.0       35776        51.8
+1      1.0       33281        48.2
 </pre></div>
 </div>
 </div>
@@ -766,6 +959,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/6bca10a380ae80b281cd6c4a33260a0a0065566af01167132c312f511c2251f2.png" src="../_images/6bca10a380ae80b281cd6c4a33260a0a0065566af01167132c312f511c2251f2.png" />
+</div>
 </div>
 <p>Como podemos observar en la tabla, la muestra está bastante equilibrada en cuanto al tabaquismo. El 52.5% de las personas reportan no ser fumadores (según la definición de la encuesta de menos de 100 cigarrillos en su vida), mientras que un 47.5% sí clasifica como fumador.</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">derrame</span></code>): Nos dice si el paciente sufrio de un derrame cerebral o no.</p>
@@ -781,6 +977,13 @@
 <span class="n">tabla_derrame</span><span class="p">[</span><span class="s1">'Porcentaje'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">tabla_derrame</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span> <span class="o">/</span> <span class="n">tabla_derrame</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">tabla_derrame</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   derrame  Frecuencia  Porcentaje
+0      0.0       64662        93.6
+1      1.0        4395         6.4
 </pre></div>
 </div>
 </div>
@@ -813,6 +1016,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/8c7a270c79a9d6301fcdc7f3dbd28ce045eab1eb8b73322f30a2124693d2d01f.png" src="../_images/8c7a270c79a9d6301fcdc7f3dbd28ce045eab1eb8b73322f30a2124693d2d01f.png" />
+</div>
 </div>
 <p>Como podemos ver, la gran mayoría de los pacientes en esta base de datos (93.8%) no han reportado haber sufrido un derrame cerebral, mientras que una pequeña minoría (6.2%) sí lo ha padecido.</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">EnfCardi</span></code>)EnfCardi: Dice si el paciente padece de una enfermedad cardiaca o no.</p>
@@ -828,6 +1034,13 @@
 <span class="n">tabla_enfcardi</span><span class="p">[</span><span class="s1">'Porcentaje'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">tabla_enfcardi</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span> <span class="o">/</span> <span class="n">tabla_enfcardi</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">tabla_enfcardi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   EnfCardi  Frecuencia  Porcentaje
+0       0.0       58638        84.9
+1       1.0       10419        15.1
 </pre></div>
 </div>
 </div>
@@ -859,6 +1072,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/83aabc674d94d9d99d808f1ac815efee9a4d83f4618ac27b84009c773fb29721.png" src="../_images/83aabc674d94d9d99d808f1ac815efee9a4d83f4618ac27b84009c773fb29721.png" />
+</div>
 </div>
 <p>El 85.2% de las personas en esta base de datos no tiene un historial de enfermedades coronarias o ataques al corazón, mientras que el 14.8% sí reporta esta condición.</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">ActFisi</span></code>): Nos dice si el paciente ha realizado actividad fisica en los ultimops 30 dias.</p>
@@ -874,6 +1090,13 @@
 <span class="n">tabla_act</span><span class="p">[</span><span class="s1">'Porcentaje'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">tabla_act</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span> <span class="o">/</span> <span class="n">tabla_act</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">tabla_act</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ActFisi  Frecuencia  Porcentaje
+0      1.0       48097        69.6
+1      0.0       20960        30.4
 </pre></div>
 </div>
 </div>
@@ -910,6 +1133,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/d03b0de51a38908ad579307c6098d86195d3e632584de8c10821b554e1275905.png" src="../_images/d03b0de51a38908ad579307c6098d86195d3e632584de8c10821b554e1275905.png" />
+</div>
 </div>
 <p>El 70.3% de las personas encuestadas reporta haber realizado actividad física recientemente, frente a un 29.7% que indica sedentarismo en ese periodo.</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">fruta</span></code>): Nos indica si el paciente consume frutas al manos 1 vez al dia.</p>
@@ -925,6 +1151,13 @@
 <span class="n">tabla_fruta</span><span class="p">[</span><span class="s1">'Porcentaje'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">tabla_fruta</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span> <span class="o">/</span> <span class="n">tabla_fruta</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">tabla_fruta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   fruta  Frecuencia  Porcentaje
+0    1.0       41825        60.6
+1    0.0       27232        39.4
 </pre></div>
 </div>
 </div>
@@ -952,6 +1185,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/28e1444b8fd870376a1040a46dbc7786ab6b0889c7a39c0871b94f2d7dd53f0d.png" src="../_images/28e1444b8fd870376a1040a46dbc7786ab6b0889c7a39c0871b94f2d7dd53f0d.png" />
+</div>
 </div>
 <p>El 61.2% de las personas encuestadas reporta consumir fruta al menos una vez al día, mientras que el 38.8% restante no cumple con este hábito diario.</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">vegetales</span></code>): Indica si el paciente consume vegetales diariamente.</p>
@@ -967,6 +1203,13 @@
 <span class="n">tabla_vegetales</span><span class="p">[</span><span class="s1">'Porcentaje'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">tabla_vegetales</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span> <span class="o">/</span> <span class="n">tabla_vegetales</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">tabla_vegetales</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   vegetales  Frecuencia  Porcentaje
+0        1.0       54149        78.4
+1        0.0       14908        21.6
 </pre></div>
 </div>
 </div>
@@ -994,6 +1237,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/8208a34c3c39c54ba70b5ed3cbd9aa15227e12775a4937c9e83988230143d527.png" src="../_images/8208a34c3c39c54ba70b5ed3cbd9aa15227e12775a4937c9e83988230143d527.png" />
+</div>
 </div>
 <p>El 78.9% de las personas en la muestra reporta consumir vegetales al menos una vez al día, mientras que el 21.1% no lo hace diariamente.</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">Alcohlico</span></code>): Nos dice si el paciente es un consumidor freceunte de alcohol</p>
@@ -1009,6 +1255,13 @@
 <span class="n">tabla_alcohol</span><span class="p">[</span><span class="s1">'Porcentaje'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">tabla_alcohol</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span> <span class="o">/</span> <span class="n">tabla_alcohol</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">tabla_alcohol</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Alcohlico  Frecuencia  Porcentaje
+0        0.0       66052        95.6
+1        1.0        3005         4.4
 </pre></div>
 </div>
 </div>
@@ -1040,6 +1293,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/551e91afca6230bc097b4134f7ac867f4eb0b3ec8b419424a7924cddd1836bbe.png" src="../_images/551e91afca6230bc097b4134f7ac867f4eb0b3ec8b419424a7924cddd1836bbe.png" />
+</div>
 </div>
 <p>Como se puede observar en los datos, una inmensa mayoría de la muestra (95.7%) no entra en la categoría de consumo excesivo de alcohol, mientras que solo un 4.3% clasifica como bebedor pesado según los criterios de la encuesta.</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">eps</span></code>): Nos indica si el paciente cuenta con algún tipo de cobertura médica o seguro de salud</p>
@@ -1055,6 +1311,13 @@
 <span class="n">tabla_eps</span><span class="p">[</span><span class="s1">'Porcentaje'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">tabla_eps</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span> <span class="o">/</span> <span class="n">tabla_eps</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">tabla_eps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   eps  Frecuencia  Porcentaje
+0  1.0       65874        95.4
+1  0.0        3183         4.6
 </pre></div>
 </div>
 </div>
@@ -1090,6 +1353,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/8e35b5d677bc17beb7e0867b2ab27d5bfd117b3b69abb3662cfc36c5e0152a35.png" src="../_images/8e35b5d677bc17beb7e0867b2ab27d5bfd117b3b69abb3662cfc36c5e0152a35.png" />
+</div>
 </div>
 <p>Como se puede ver en la tabla, una amplísima mayoría de la población analizada (95.5%) cuenta con cobertura de salud, mientras que solo un 4.5% carece de ella.</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">AfordabilidadMedica</span></code>): Nos indica si la persona necesitó ver a un médico en los últimos 12 meses pero no pudo hacerlo debido al costo.</p>
@@ -1105,6 +1371,13 @@
 <span class="n">tabla_afordabilidad</span><span class="p">[</span><span class="s1">'Porcentaje'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">tabla_afordabilidad</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span> <span class="o">/</span> <span class="n">tabla_afordabilidad</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">tabla_afordabilidad</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   AfordabilidadMedica  Frecuencia  Porcentaje
+0                  0.0       62418        90.4
+1                  1.0        6639         9.6
 </pre></div>
 </div>
 </div>
@@ -1134,6 +1407,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/f1fed5f3833e84b258fadb81446ee8330e13071e9524eec35842d81d078bee50.png" src="../_images/f1fed5f3833e84b258fadb81446ee8330e13071e9524eec35842d81d078bee50.png" />
+</div>
 </div>
 <p>Como se observa en los datos, la gran mayoría de los encuestados (90.6%) no experimentó limitaciones económicas para recibir atención médica, mientras que un 9.4% sí se vio en la situación de no poder asistir a una consulta médica por motivos financieros.</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">SaludG</span></code>): Responde a la pregunta ¿Diría que en general su salud es…” en una escala del 1 al 5. Siendo 1 exelente, 2 muy buena, 3 buena, 4 regular y 5 pobre.</p>
@@ -1150,6 +1426,16 @@
 <span class="n">tabla_saludg</span><span class="p">[</span><span class="s1">'Porcentaje'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">tabla_saludg</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span> <span class="o">/</span> <span class="n">tabla_saludg</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">tabla_saludg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   SaludG  Frecuencia  Porcentaje
+0     1.0        7607        11.0
+1     2.0       19105        27.7
+2     3.0       23246        33.7
+3     4.0       13292        19.2
+4     5.0        5807         8.4
 </pre></div>
 </div>
 </div>
@@ -1191,6 +1477,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/84d356213f00771093b4dfc413ce4d8223fcb1ca364bd98c7c96ea5613e42f7a.png" src="../_images/84d356213f00771093b4dfc413ce4d8223fcb1ca364bd98c7c96ea5613e42f7a.png" />
+</div>
 </div>
 <p>Como se observa en los datos, la mayor concentración de respuestas se encuentra en las categorías de “Buena” (33.1%) y “Muy buena” (28.1%), abarcando más de la mitad de la población analizada, despues le sigue “regular” (19.2%) y por ultimo “exelente” (11%) y “pobre” (8.4%).</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">DificultadCaminar</span></code>): Datos respondiendo a la pregunta de si la persona tiene seria dificultad para caminar o subir escaleras</p>
@@ -1206,6 +1495,13 @@
 <span class="n">tabla_diffwalk</span><span class="p">[</span><span class="s1">'Porcentaje'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">tabla_diffwalk</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span> <span class="o">/</span> <span class="n">tabla_diffwalk</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">tabla_diffwalk</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   DificultadCaminar  Frecuencia  Porcentaje
+0                0.0       51198        74.1
+1                1.0       17859        25.9
 </pre></div>
 </div>
 </div>
@@ -1241,6 +1537,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/6820004e2ed83fe69a68bb5fe78083e9de46dc14b88a7e8690f053a9d21893d4.png" src="../_images/6820004e2ed83fe69a68bb5fe78083e9de46dc14b88a7e8690f053a9d21893d4.png" />
+</div>
 </div>
 <p>Como se puede observar en los datos, la gran mayoría de la población encuestada (74.7%) no reporta problemas graves de movilidad, mientras que una cuarta parte de la muestra (25.3%) indica que sí padece dificultades para caminar o subir escaleras.</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">Genero</span></code>): Nos hace saber el genero o sexo del paciente: 0 para mujeres y 1 para hombres.</p>
@@ -1257,6 +1556,13 @@
 <span class="n">tabla_genero</span><span class="p">[</span><span class="s1">'Porcentaje'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">tabla_genero</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span> <span class="o">/</span> <span class="n">tabla_genero</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">tabla_genero</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Genero  Frecuencia  Porcentaje
+0     0.0       37535        54.4
+1     1.0       31522        45.6
 </pre></div>
 </div>
 </div>
@@ -1292,6 +1598,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/aefcee09a2748795aea10dfb7dc3d72a38ecbdbb00e57f79eb66de40c6413915.png" src="../_images/aefcee09a2748795aea10dfb7dc3d72a38ecbdbb00e57f79eb66de40c6413915.png" />
+</div>
 </div>
 <p>Como se puede ver en los datos, la muestra cuenta con una mayor proporción de mujeres (54.3%) frente a los hombres (45.7%), manteniéndose sin embargo en un rango bastante equilibrado.</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">Edad</span></code>): Está codificada en una escala ordinal de 13 categorías de rangos de edad de 5 años (desde 1 para 18-24 hasta 13 para mayores de 80 años).</p>
@@ -1309,6 +1618,25 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Tabla de Frecuencias de Edad:"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">tabla_edad</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tabla de Frecuencias de Edad:
+    Edad  Frecuencia  Porcentaje
+0    1.0         972         1.4
+1    2.0        1378         2.0
+2    3.0        1994         2.9
+3    4.0        2691         3.9
+4    5.0        3387         4.9
+5    6.0        4472         6.5
+6    7.0        6627         9.6
+7    8.0        8392        12.2
+8    9.0        9873        14.3
+9   10.0       10585        15.3
+10  11.0        7932        11.5
+11  12.0        5358         7.8
+12  13.0        5396         7.8
 </pre></div>
 </div>
 </div>
@@ -1347,6 +1675,9 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/701be4796c63075a31d8f80321ce80734e901846a4770c962447bff49b49d5bf.png" src="../_images/701be4796c63075a31d8f80321ce80734e901846a4770c962447bff49b49d5bf.png" />
+</div>
 </div>
 <p>La distribución etaria tiende a sesgarse hacia los adultos de mediana edad y adultos mayores (categorías del 7 al 13, es decir, de 50 años en adelante).</p>
 <p>(<code class="docutils literal notranslate"><span class="pre">Educacion</span></code>): está codificada en una escala ordinal de 6 niveles que miden el nivel educativo máximo alcanzado por el encuestado.</p>
@@ -1364,6 +1695,18 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Tabla de Frecuencias de Educación:"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">tabla_educacion</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tabla de Frecuencias de Educación:
+   Educacion  Frecuencia  Porcentaje
+0        1.0          75         0.1
+1        2.0        1647         2.4
+2        3.0        3447         5.0
+3        4.0       19397        28.1
+4        5.0       19845        28.7
+5        6.0       24646        35.7
 </pre></div>
 </div>
 </div>
@@ -1407,15 +1750,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
-  if pd.api.types.is_categorical_dtype(vector):
-c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
-  if pd.api.types.is_categorical_dtype(vector):
-c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
-  if pd.api.types.is_categorical_dtype(vector):
-</pre></div>
-</div>
-<img alt="../_images/a9b89b6253d40b0f16e3badee58a7a9496b74476042bff311ff577e4a2aa2d50.png" src="../_images/a9b89b6253d40b0f16e3badee58a7a9496b74476042bff311ff577e4a2aa2d50.png" />
+<img alt="../_images/201475b3b19c6f0cae5e532cb1c8a544c3072b1d40341391475ccc2347a74cee.png" src="../_images/201475b3b19c6f0cae5e532cb1c8a544c3072b1d40341391475ccc2347a74cee.png" />
 </div>
 </div>
 <p>La mayoria de personas encuestadas completaron al menos la secundaria mientras que unos pocos tienen un nivel educativo inferior a secundaria.</p>
@@ -1434,6 +1769,20 @@ c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_old
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Tabla de Frecuencias de Ingresos:"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">tabla_ingresos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tabla de Frecuencias de Ingresos:
+   Ingresos  Frecuencia  Porcentaje
+0       1.0        3611         5.2
+1       2.0        4497         6.5
+2       3.0        5552         8.0
+3       4.0        6646         9.6
+4       5.0        7975        11.5
+5       6.0       10195        14.8
+6       7.0       11274        16.3
+7       8.0       19307        28.0
 </pre></div>
 </div>
 </div>
@@ -1479,15 +1828,7 @@ c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_old
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
-  if pd.api.types.is_categorical_dtype(vector):
-c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
-  if pd.api.types.is_categorical_dtype(vector):
-c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
-  if pd.api.types.is_categorical_dtype(vector):
-</pre></div>
-</div>
-<img alt="../_images/7b105dd06f73373ad287c50ff1bd2987409658d36261c0288881642dd7a15c7b.png" src="../_images/7b105dd06f73373ad287c50ff1bd2987409658d36261c0288881642dd7a15c7b.png" />
+<img alt="../_images/5c53293ead51ce0d5314df45c07047b7c2dba23018979f147bb19a077913bbb4.png" src="../_images/5c53293ead51ce0d5314df45c07047b7c2dba23018979f147bb19a077913bbb4.png" />
 </div>
 </div>
 <p>Podemos ver que la mayoria de personas encuestadas cuentan con ingresos anuales superiores a 25k<span class="math notranslate nohighlight">\(, gran parte de los encuestados ganando mas de 75k\)</span>. Por otro lado hay menos personas ganando por debajo de los 25k<span class="math notranslate nohighlight">\(, siendo muy poco el porcentaje de gente que gana menos de 10k\)</span>.</p>
@@ -1516,6 +1857,15 @@ c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_old
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                Estadística  Valor
+0                  Promedio  29.96
+1  Rango Intercuartil (IQR)   8.00
+2                    Mínimo  12.00
+3                    Máximo  98.00
+</pre></div>
+</div>
+</div>
 </div>
 <p><strong>Grafico</strong></p>
 <div class="cell docutils container">
@@ -1533,6 +1883,13 @@ c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_old
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\abrah\miniconda3\envs\juancho\lib\site-packages\seaborn\_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context('mode.use_inf_as_na', True):
+</pre></div>
+</div>
+<img alt="../_images/a3959629eef46d91498e2188acdcd5cf6890140da057bcd222d40eaa059d43de.png" src="../_images/a3959629eef46d91498e2188acdcd5cf6890140da057bcd222d40eaa059d43de.png" />
 </div>
 </div>
 <p>Como podemos ver, la distribución no es una campana simétrica perfecta. Tiene una “cola” larga que se extiende hacia la derecha. Esto se debe a los valores atípicos (outliers) de IMC muy altos (personas con obesidad severa, llegando hasta 98.0) que vimos en el diagrama de caja anterior.
@@ -1556,6 +1913,15 @@ La gran mayoría de las personas se concentran en el rango de un IMC entre 25.0 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                Estadística                   Valor
+0                  Promedio                    3.84
+1  Rango Intercuartil (IQR)  3.0 (Q1: 0.0, Q3: 3.0)
+2                    Mínimo                     0.0
+3                    Máximo                    30.0
+</pre></div>
+</div>
+</div>
 </div>
 <p><strong>Grafico</strong></p>
 <div class="cell docutils container">
@@ -1572,6 +1938,9 @@ La gran mayoría de las personas se concentran en el rango de un IMC entre 25.0 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3c105b50903f97ccc479606932096b0c65cacda8893b0672aa2ff3e4031b74cf.png" src="../_images/3c105b50903f97ccc479606932096b0c65cacda8893b0672aa2ff3e4031b74cf.png" />
 </div>
 </div>
 <p>Como se ve en el IQR, el 75% de las personas reportan haber tenido 2 días o menos de mala salud mental al mes (y una gran mayoría reporta exactamente 0 días). Sin embargo, existen valores atípicos (outliers) que alcanzan hasta los 30 días completos.</p>
@@ -1619,6 +1988,9 @@ La gran mayoría de las personas se concentran en el rango de un IMC entre 25.0 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8268fc780b4bebb3115d784f9b6bd6b113926132cf28642ed237b904d43d1551.png" src="../_images/8268fc780b4bebb3115d784f9b6bd6b113926132cf28642ed237b904d43d1551.png" />
 </div>
 </div>
 <p>El promedio de días con mala salud física es ligeramente mayor (5.81 días frente a 3.75). El rango intercuartil indica que el 75% central de las personas reportan tener 6 días o menos de malestar físico al mes, aunque encontramos valores extremos que llegan hasta los 30 días completos.</p>
