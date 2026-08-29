@@ -1,0 +1,29 @@
+title: Análisis Exploratorio Bivariado - Diabetes
+author: Autor del análisis
+logo: ""
+
+# Force re-execution of notebooks on each build?
+# See https://jupyterbook.org/content/execute.html
+execute:
+  execute_notebooks: "off"
+
+# Define the name of the latex output file for PDF builds
+latex:
+  latex_documents:
+    targetname: book.tex
+
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/abrahanb123/book_phyton  # actualiza con tu usuario/repo
+  branch: main
+  path_to_book: ""
+
+# Add GitHub buttons to your book
+html:
+  use_issues_button: true
+  use_repository_button: true
+
+sphinx:
+  config:
+    html_theme_options:
+      show_navbar_depth: 2
