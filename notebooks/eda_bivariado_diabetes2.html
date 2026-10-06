@@ -66,7 +66,7 @@
     <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Analisis Univariado" href="eda_univariado_diabetes.html" />
+    <link rel="prev" title="Analisis Univariado" href="eda_univariado_diabetes2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -187,7 +187,7 @@
     
   
 
-<a class="navbar-brand logo" href="eda_univariado_diabetes.html">
+<a class="navbar-brand logo" href="eda_univariado_diabetes2.html">
   
   
   
@@ -353,15 +353,19 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias">0. Librerías</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-preparacion-de-datos">1. Carga y preparación de datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-respuesta-frente-a-variables-numericas">2. Variable respuesta frente a variables numéricas</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">1. Introducción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos">2. Objetivos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marco-teorico">3. Marco Teórico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologia">4. Metodología</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias">Librerías</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-preparacion-de-datos">5. Carga y preparación de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-respuesta-frente-a-variables-numericas">6. Variable respuesta frente a variables numéricas</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-imc-indice-de-masa-corporal">Variable <code class="docutils literal notranslate"><span class="pre">IMC</span></code> (Índice de Masa Corporal)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-saludm-dias-de-salud-mental-no-buena-en-los-ultimos-30-dias">Variable <code class="docutils literal notranslate"><span class="pre">SaludM</span></code> (días de salud mental no buena en los últimos 30 días)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-saludf-dias-de-salud-fisica-no-buena-en-los-ultimos-30-dias">Variable <code class="docutils literal notranslate"><span class="pre">SaludF</span></code> (días de salud física no buena en los últimos 30 días)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-respuesta-frente-a-variables-categoricas">3. Variable respuesta frente a variables categóricas</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-respuesta-frente-a-variables-categoricas">7. Variable respuesta frente a variables categóricas</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-pa-alta-presion-arterial-alta">Variable <code class="docutils literal notranslate"><span class="pre">PA_alta</span></code> (presión arterial alta)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-col-alto-colesterol-alto">Variable <code class="docutils literal notranslate"><span class="pre">col_alto</span></code> (colesterol alto)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-checkcol-chequeo-de-colesterol-en-los-ultimos-5-anos">Variable <code class="docutils literal notranslate"><span class="pre">CheckCol</span></code> (chequeo de colesterol en los últimos 5 años)</a></li>
@@ -382,7 +386,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-ingresos-nivel-de-ingresos-anual-del-hogar">Variable <code class="docutils literal notranslate"><span class="pre">Ingresos</span></code> (nivel de ingresos anual del hogar)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">4. Conclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">8. Conclusión</a></li>
 </ul>
             </nav>
         </div>
@@ -396,9 +400,39 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="analisis-exploratorio-bivariado">
 <h1>Análisis Exploratorio Bivariado<a class="headerlink" href="#analisis-exploratorio-bivariado" title="Link to this heading">#</a></h1>
+<section id="introduccion">
+<h2>1. Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
+<p>La diabetes es una enfermedad crónica de alto impacto en la salud pública, relacionada con múltiples factores de riesgo modificables y no modificables (obesidad, sedentarismo, hipertensión, colesterol alto, edad, nivel socioeconómico, entre otros). Comprender cómo se relacionan estos factores con la condición de diabetes es un primer paso indispensable antes de construir modelos predictivos.</p>
+<p>Este notebook desarrolla el <strong>análisis exploratorio bivariado</strong> del conjunto de datos <code class="docutils literal notranslate"><span class="pre">diabetes_binary_5050split_health_indicators_BRFSS2015</span></code> (encuesta BRFSS 2015, balanceada 50/50 entre personas con y sin diabetes/prediabetes), tomando como variable de respuesta la condición de diabetes del paciente (<code class="docutils literal notranslate"><span class="pre">Diabetes</span></code>). El análisis parte de los resultados obtenidos en el análisis univariado y los complementa comparando cada variable frente a los dos grupos de la variable de respuesta.</p>
+</section>
+<section id="objetivos">
+<h2>2. Objetivos<a class="headerlink" href="#objetivos" title="Link to this heading">#</a></h2>
+<p><strong>Objetivo general</strong></p>
+<p>Evaluar la relación entre la condición de diabetes (<code class="docutils literal notranslate"><span class="pre">Diabetes</span></code>) y el resto de variables del conjunto de datos, mediante comparaciones estadísticas y gráficas entre los grupos con y sin diabetes/prediabetes.</p>
+<p><strong>Objetivos específicos</strong></p>
+<ul class="simple">
+<li><p>Comparar la distribución de las variables numéricas (<code class="docutils literal notranslate"><span class="pre">IMC</span></code>, <code class="docutils literal notranslate"><span class="pre">SaludM</span></code>, <code class="docutils literal notranslate"><span class="pre">SaludF</span></code>) entre los grupos con y sin diabetes, mediante gráficos de caja y bigotes y pruebas estadísticas de normalidad, igualdad de varianzas y comparación de medianas/medias.</p></li>
+<li><p>Construir tablas de contingencia y gráficos de barras agrupadas para comparar la distribución de cada variable categórica según la condición de diabetes.</p></li>
+<li><p>Aplicar la prueba chi-cuadrado de independencia para determinar si existe una asociación estadísticamente significativa entre cada variable categórica y la condición de diabetes.</p></li>
+<li><p>Identificar las variables que muestran mayor asociación con la diabetes, como insumo para un eventual modelo predictivo.</p></li>
+</ul>
+</section>
+<section id="marco-teorico">
+<h2>3. Marco Teórico<a class="headerlink" href="#marco-teorico" title="Link to this heading">#</a></h2>
+<p><strong>Análisis bivariado</strong>: técnica exploratoria que estudia la relación entre dos variables, en este caso cada variable del conjunto de datos frente a la variable de respuesta <code class="docutils literal notranslate"><span class="pre">Diabetes</span></code>.</p>
+<p><strong>Pruebas de normalidad e igualdad de varianzas</strong>: la prueba de <strong>Anderson-Darling</strong> evalúa si una muestra proviene de una distribución normal, mientras que la prueba de <strong>Levene</strong> evalúa si dos o más grupos tienen varianzas iguales. Estas pruebas determinan qué prueba de comparación de grupos es la más adecuada.</p>
+<p><strong>Prueba de Mann-Whitney (Wilcoxon rank-sum)</strong>: prueba no paramétrica utilizada para comparar las distribuciones de dos grupos independientes cuando no se cumple el supuesto de normalidad, como ocurre con las variables numéricas de este conjunto de datos.</p>
+<p><strong>Prueba chi-cuadrado de independencia</strong>: prueba estadística que permite determinar si existe una asociación significativa entre dos variables categóricas, comparando las frecuencias observadas con las frecuencias esperadas bajo el supuesto de independencia.</p>
+<p><strong>Prevalencia</strong>: en epidemiología, la prevalencia corresponde a la proporción de personas que presentan una condición (en este caso, diabetes) dentro de un grupo o categoría específica. A diferencia de un porcentaje calculado dentro del grupo de diabéticos, la prevalencia se calcula sobre el total de personas de cada categoría de la variable analizada, y resulta útil para identificar qué categorías concentran mayor riesgo.</p>
+</section>
+<section id="metodologia">
+<h2>4. Metodología<a class="headerlink" href="#metodologia" title="Link to this heading">#</a></h2>
+<p>Primero se comparará la variable de respuesta frente a las variables numéricas (<code class="docutils literal notranslate"><span class="pre">IMC</span></code>, <code class="docutils literal notranslate"><span class="pre">SaludM</span></code>, <code class="docutils literal notranslate"><span class="pre">SaludF</span></code>) mediante gráficos de caja y bigotes, pruebas de normalidad, de igualdad de varianzas y de comparación de medianas/medias entre los dos grupos (con y sin diabetes). Posteriormente se comparará la variable de respuesta frente a cada una de las variables categóricas mediante tablas de contingencia, gráficos de barras agrupadas, la prueba chi-cuadrado de independencia y el cálculo de la prevalencia de diabetes en cada categoría.</p>
+<p>Todas las gráficas del notebook comparten la misma paleta de colores (azul para el grupo “Sin diabetes” y naranja para el grupo “Con diabetes / prediabetes”) para facilitar la comparación visual entre variables.</p>
 <p>A continuación se realiza el análisis bivariado del conjunto de datos <code class="docutils literal notranslate"><span class="pre">diabetes_binary_5050split_health_indicators_BRFSS2015</span></code>, tomando como variable de respuesta la condición de diabetes del paciente (<code class="docutils literal notranslate"><span class="pre">Diabetes</span></code>). Se seguirá la misma lógica utilizada en el análisis univariado: primero se comparará la variable de respuesta frente a las variables numéricas (<code class="docutils literal notranslate"><span class="pre">IMC</span></code>, <code class="docutils literal notranslate"><span class="pre">SaludM</span></code>, <code class="docutils literal notranslate"><span class="pre">SaludF</span></code>) mediante gráficos de caja y bigotes, pruebas de normalidad, de igualdad de varianzas y de comparación de medianas/medias entre los dos grupos (con y sin diabetes). Posteriormente se comparará la variable de respuesta frente a cada una de las variables categóricas mediante tablas de contingencia, gráficos de barras agrupadas y la prueba chi-cuadrado de independencia.</p>
+</section>
 <section id="librerias">
-<h2>0. Librerías<a class="headerlink" href="#librerias" title="Link to this heading">#</a></h2>
+<h2>Librerías<a class="headerlink" href="#librerias" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -409,16 +443,30 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">anderson</span><span class="p">,</span> <span class="n">levene</span><span class="p">,</span> <span class="n">chi2_contingency</span><span class="p">,</span> <span class="n">mannwhitneyu</span>
 
 <span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">'whitegrid'</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="n">columna</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Añade sobre cada categoría el porcentaje de personas con diabetes</span>
+<span class="sd">    (prevalencia) dentro de esa categoría, calculado sobre el total de</span>
+<span class="sd">    personas de la categoría (no solo sobre el grupo con diabetes)."""</span>
+    <span class="n">categorias_orden</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df_plot</span><span class="p">[</span><span class="s1">'categoria'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">cat</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">categorias_orden</span><span class="p">):</span>
+        <span class="n">prevalencia</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">columna</span><span class="p">]</span> <span class="o">==</span> <span class="n">cat</span><span class="p">,</span> <span class="n">target</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>
+        <span class="n">y_max</span> <span class="o">=</span> <span class="n">df_plot</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_plot</span><span class="p">[</span><span class="s1">'categoria'</span><span class="p">]</span> <span class="o">==</span> <span class="n">cat</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Prevalencia: </span><span class="si">{</span><span class="n">prevalencia</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%"</span><span class="p">,</span>
+                    <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_max</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'bottom'</span><span class="p">,</span>
+                    <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#555555'</span><span class="p">,</span> <span class="n">fontstyle</span><span class="o">=</span><span class="s1">'italic'</span><span class="p">,</span>
+                    <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span> <span class="n">textcoords</span><span class="o">=</span><span class="s1">'offset points'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="carga-y-preparacion-de-datos">
-<h2>1. Carga y preparación de datos<a class="headerlink" href="#carga-y-preparacion-de-datos" title="Link to this heading">#</a></h2>
+<h2>5. Carga y preparación de datos<a class="headerlink" href="#carga-y-preparacion-de-datos" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"C:\Users\abrah\OneDrive - Universidad del Norte\Documentos\DataViz_2026\python\data\diabetes.csv"</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"Data\diabetes_binary_5050split_health_indicators_BRFSS2015.csv"</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">','</span><span class="p">)</span>
 
@@ -637,7 +685,13 @@
     <span class="s1">'DificultadCaminar'</span><span class="p">,</span> <span class="s1">'Genero'</span><span class="p">,</span> <span class="s1">'Edad'</span><span class="p">,</span> <span class="s1">'Educacion'</span><span class="p">,</span> <span class="s1">'Ingresos'</span>
 <span class="p">]</span>
 
-<span class="n">paleta</span> <span class="o">=</span> <span class="p">{</span><span class="mf">0.0</span><span class="p">:</span> <span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">:</span> <span class="s1">'#DD8452'</span><span class="p">}</span>
+
+<span class="n">COLOR_SIN</span>   <span class="o">=</span> <span class="s1">'#06347D'</span>   <span class="c1"># Azul eléctrico  -&gt; Sin diabetes</span>
+<span class="n">COLOR_CON</span>   <span class="o">=</span> <span class="s1">'#E80808'</span>   <span class="c1"># Rojo intenso -&gt; Con diabetes / prediabetes</span>
+<span class="n">COLOR_MEDIA</span> <span class="o">=</span> <span class="s1">'#E6E909'</span>   <span class="c1"># Amarillo vivo   -&gt; marcador de la media</span>
+
+<span class="n">paleta</span> <span class="o">=</span> <span class="p">{</span><span class="mf">0.0</span><span class="p">:</span> <span class="n">COLOR_SIN</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">:</span> <span class="n">COLOR_CON</span><span class="p">}</span>
+<span class="n">paleta_lista</span> <span class="o">=</span> <span class="p">[</span><span class="n">COLOR_SIN</span><span class="p">,</span> <span class="n">COLOR_CON</span><span class="p">]</span>
 <span class="n">etiquetas_diabetes</span> <span class="o">=</span> <span class="p">{</span><span class="mf">0.0</span><span class="p">:</span> <span class="s1">'Sin diabetes'</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">:</span> <span class="s1">'Con diabetes / prediabetes'</span><span class="p">}</span>
 </pre></div>
 </div>
@@ -645,7 +699,7 @@
 </div>
 </section>
 <section id="variable-respuesta-frente-a-variables-numericas">
-<h2>2. Variable respuesta frente a variables numéricas<a class="headerlink" href="#variable-respuesta-frente-a-variables-numericas" title="Link to this heading">#</a></h2>
+<h2>6. Variable respuesta frente a variables numéricas<a class="headerlink" href="#variable-respuesta-frente-a-variables-numericas" title="Link to this heading">#</a></h2>
 <p>Para cada variable numérica se compararán los dos grupos de la variable de respuesta (<code class="docutils literal notranslate"><span class="pre">Diabetes</span></code> = 0 sin diabetes, <code class="docutils literal notranslate"><span class="pre">Diabetes</span></code> = 1 con diabetes o prediabetes) mediante un gráfico de caja y bigotes bivariado, un resumen descriptivo por grupo, una prueba de normalidad (Anderson-Darling, adecuada para muestras grandes) y una prueba de igualdad de varianzas (Levene). De acuerdo con los resultados de estas dos pruebas se elegirá la prueba de comparación de grupos más apropiada.</p>
 <section id="variable-imc-indice-de-masa-corporal">
 <h3>Variable <code class="docutils literal notranslate"><span class="pre">IMC</span></code> (Índice de Masa Corporal)<a class="headerlink" href="#variable-imc-indice-de-masa-corporal" title="Link to this heading">#</a></h3>
@@ -658,11 +712,14 @@
 <span class="n">etiquetas</span> <span class="o">=</span> <span class="p">[</span><span class="n">etiquetas_diabetes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">target</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())]</span>
 
 <span class="n">bp</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">grupos</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">etiquetas</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="n">boxprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">),</span>
-                <span class="n">medianprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">),</span>
+                <span class="n">boxprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">),</span>
+                <span class="n">medianprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
                 <span class="n">flierprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">patch</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">'boxes'</span><span class="p">],</span> <span class="n">paleta_lista</span><span class="p">):</span>
+    <span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">grupos</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'D'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR_MEDIA</span><span class="p">,</span> <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span>
+            <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'¿El paciente tiene diabetes?'</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'IMC'</span><span class="p">)</span>
@@ -673,7 +730,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8ec5d4796ae8d4f5659c69a67e02619a5c298856db943cc9a1675ee889cfb970.png" src="../_images/8ec5d4796ae8d4f5659c69a67e02619a5c298856db943cc9a1675ee889cfb970.png" />
+<img alt="../_images/c76e34cb02f1910f9c3fa1dcb80655d2b8dd78db6ea8b048d95d05f648655e7e.png" src="../_images/c76e34cb02f1910f9c3fa1dcb80655d2b8dd78db6ea8b048d95d05f648655e7e.png" />
 </div>
 </div>
 <p>El gráfico muestra que los pacientes con diabetes o prediabetes presentan valores de <code class="docutils literal notranslate"><span class="pre">IMC</span></code> más altos que los pacientes sin diabetes: la media pasa de 27.88 en el grupo sin diabetes a 31.96 en el grupo con diabetes, y la mediana de 27.0 a 31.0. El grupo con diabetes también muestra mayor dispersión (IQR de 9.0 frente a 7.0 en el grupo sin diabetes), lo que sugiere una relación entre esta variable y la condición de diabetes.</p>
@@ -812,19 +869,13 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anderson-Darling: Sin diabetes
 Estadístico: 640.0333
-Valor crítico al 5%: 0.7520
+Valor crítico al 5%: 0.7870
 Resultado: Rechaza H0 (no normal)
 
 Anderson-Darling: Con diabetes
 Estadístico: 519.7446
-Valor crítico al 5%: 0.7520
+Valor crítico al 5%: 0.7870
 Resultado: Rechaza H0 (no normal)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_589/3765622152.py:4: FutureWarning: As of SciPy 1.17, users must choose a p-value calculation method by providing the `method` parameter. `method='interpolate'` interpolates the p-value from pre-calculated tables; `method` may also be an instance of `MonteCarloMethod` to approximate the p-value via Monte Carlo simulation. When `method` is specified, the result object will include a `pvalue` attribute and not attributes `critical_value`, `significance_level`, or `fit_result`. Beginning in 1.19.0, these other attributes will no longer be available, and a p-value will always be computed according to one of the available `method` options.
-  res_0 = anderson(grupo_0, dist='norm')
-/tmp/ipykernel_589/3765622152.py:5: FutureWarning: As of SciPy 1.17, users must choose a p-value calculation method by providing the `method` parameter. `method='interpolate'` interpolates the p-value from pre-calculated tables; `method` may also be an instance of `MonteCarloMethod` to approximate the p-value via Monte Carlo simulation. When `method` is specified, the result object will include a `pvalue` attribute and not attributes `critical_value`, `significance_level`, or `fit_result`. Beginning in 1.19.0, these other attributes will no longer be available, and a p-value will always be computed according to one of the available `method` options.
-  res_1 = anderson(grupo_1, dist='norm')
 </pre></div>
 </div>
 </div>
@@ -884,11 +935,14 @@ Resultado: Rechaza H0 (distribuciones distintas)
 <span class="n">etiquetas</span> <span class="o">=</span> <span class="p">[</span><span class="n">etiquetas_diabetes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">target</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())]</span>
 
 <span class="n">bp</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">grupos</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">etiquetas</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="n">boxprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">),</span>
-                <span class="n">medianprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">),</span>
+                <span class="n">boxprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">),</span>
+                <span class="n">medianprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
                 <span class="n">flierprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">patch</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">'boxes'</span><span class="p">],</span> <span class="n">paleta_lista</span><span class="p">):</span>
+    <span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">grupos</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'D'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR_MEDIA</span><span class="p">,</span> <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span>
+            <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'¿El paciente tiene diabetes?'</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'SaludM'</span><span class="p">)</span>
@@ -899,11 +953,7 @@ Resultado: Rechaza H0 (distribuciones distintas)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_589/759928918.py:6: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.
-  bp = ax.boxplot(grupos, labels=etiquetas, patch_artist=True,
-</pre></div>
-</div>
-<img alt="../_images/89e544b534f55c5d1ab6cc7cae351139152141ade52cd57e5ff31f8cc25d61c9.png" src="../_images/89e544b534f55c5d1ab6cc7cae351139152141ade52cd57e5ff31f8cc25d61c9.png" />
+<img alt="../_images/f082cb7c0b5d81f3041dd01c0b75bfd9081759655ad8c5bab65c3d7d079b4e91.png" src="../_images/f082cb7c0b5d81f3041dd01c0b75bfd9081759655ad8c5bab65c3d7d079b4e91.png" />
 </div>
 </div>
 <p>El gráfico muestra que los pacientes con diabetes o prediabetes presentan valores de <code class="docutils literal notranslate"><span class="pre">SaludM</span></code> más altos que los pacientes sin diabetes: la media pasa de 3.16 en el grupo sin diabetes a 4.49 en el grupo con diabetes, y la mediana de 0.0 a 0.0. El grupo con diabetes también muestra mayor dispersión (IQR de 3.0 frente a 2.0 en el grupo sin diabetes), lo que sugiere una relación entre esta variable y la condición de diabetes.</p>
@@ -1042,19 +1092,13 @@ Resultado: Rechaza H0 (distribuciones distintas)
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anderson-Darling: Sin diabetes
 Estadístico: 7261.1022
-Valor crítico al 5%: 0.7520
+Valor crítico al 5%: 0.7870
 Resultado: Rechaza H0 (no normal)
 
 Anderson-Darling: Con diabetes
 Estadístico: 6930.6503
-Valor crítico al 5%: 0.7520
+Valor crítico al 5%: 0.7870
 Resultado: Rechaza H0 (no normal)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_589/3129898607.py:4: FutureWarning: As of SciPy 1.17, users must choose a p-value calculation method by providing the `method` parameter. `method='interpolate'` interpolates the p-value from pre-calculated tables; `method` may also be an instance of `MonteCarloMethod` to approximate the p-value via Monte Carlo simulation. When `method` is specified, the result object will include a `pvalue` attribute and not attributes `critical_value`, `significance_level`, or `fit_result`. Beginning in 1.19.0, these other attributes will no longer be available, and a p-value will always be computed according to one of the available `method` options.
-  res_0 = anderson(grupo_0, dist='norm')
-/tmp/ipykernel_589/3129898607.py:5: FutureWarning: As of SciPy 1.17, users must choose a p-value calculation method by providing the `method` parameter. `method='interpolate'` interpolates the p-value from pre-calculated tables; `method` may also be an instance of `MonteCarloMethod` to approximate the p-value via Monte Carlo simulation. When `method` is specified, the result object will include a `pvalue` attribute and not attributes `critical_value`, `significance_level`, or `fit_result`. Beginning in 1.19.0, these other attributes will no longer be available, and a p-value will always be computed according to one of the available `method` options.
-  res_1 = anderson(grupo_1, dist='norm')
 </pre></div>
 </div>
 </div>
@@ -1114,11 +1158,14 @@ Resultado: Rechaza H0 (distribuciones distintas)
 <span class="n">etiquetas</span> <span class="o">=</span> <span class="p">[</span><span class="n">etiquetas_diabetes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">target</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())]</span>
 
 <span class="n">bp</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">grupos</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">etiquetas</span><span class="p">,</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="n">boxprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">),</span>
-                <span class="n">medianprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">),</span>
+                <span class="n">boxprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">),</span>
+                <span class="n">medianprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
                 <span class="n">flierprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">patch</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="s1">'boxes'</span><span class="p">],</span> <span class="n">paleta_lista</span><span class="p">):</span>
+    <span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">grupos</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'D'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLOR_MEDIA</span><span class="p">,</span> <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span>
+            <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'¿El paciente tiene diabetes?'</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'SaludF'</span><span class="p">)</span>
@@ -1129,11 +1176,7 @@ Resultado: Rechaza H0 (distribuciones distintas)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_589/2621245245.py:6: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.
-  bp = ax.boxplot(grupos, labels=etiquetas, patch_artist=True,
-</pre></div>
-</div>
-<img alt="../_images/c1c18e2757531b6dd980200e881383bd0ae8cd19494859e6b7057084c0edeae5.png" src="../_images/c1c18e2757531b6dd980200e881383bd0ae8cd19494859e6b7057084c0edeae5.png" />
+<img alt="../_images/c7a3b209963b7440f370f41aa70132414e1317508dabe7987a22f221d375c64b.png" src="../_images/c7a3b209963b7440f370f41aa70132414e1317508dabe7987a22f221d375c64b.png" />
 </div>
 </div>
 <p>El gráfico muestra que los pacientes con diabetes o prediabetes presentan valores de <code class="docutils literal notranslate"><span class="pre">SaludF</span></code> más altos que los pacientes sin diabetes: la media pasa de 3.81 en el grupo sin diabetes a 8.01 en el grupo con diabetes, y la mediana de 0.0 a 1.0. El grupo con diabetes también muestra mayor dispersión (IQR de 15.0 frente a 2.0 en el grupo sin diabetes), lo que sugiere una relación entre esta variable y la condición de diabetes.</p>
@@ -1272,19 +1315,13 @@ Resultado: Rechaza H0 (distribuciones distintas)
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anderson-Darling: Sin diabetes
 Estadístico: 7031.1427
-Valor crítico al 5%: 0.7520
+Valor crítico al 5%: 0.7870
 Resultado: Rechaza H0 (no normal)
 
 Anderson-Darling: Con diabetes
 Estadístico: 4639.2176
-Valor crítico al 5%: 0.7520
+Valor crítico al 5%: 0.7870
 Resultado: Rechaza H0 (no normal)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_589/233675159.py:4: FutureWarning: As of SciPy 1.17, users must choose a p-value calculation method by providing the `method` parameter. `method='interpolate'` interpolates the p-value from pre-calculated tables; `method` may also be an instance of `MonteCarloMethod` to approximate the p-value via Monte Carlo simulation. When `method` is specified, the result object will include a `pvalue` attribute and not attributes `critical_value`, `significance_level`, or `fit_result`. Beginning in 1.19.0, these other attributes will no longer be available, and a p-value will always be computed according to one of the available `method` options.
-  res_0 = anderson(grupo_0, dist='norm')
-/tmp/ipykernel_589/233675159.py:5: FutureWarning: As of SciPy 1.17, users must choose a p-value calculation method by providing the `method` parameter. `method='interpolate'` interpolates the p-value from pre-calculated tables; `method` may also be an instance of `MonteCarloMethod` to approximate the p-value via Monte Carlo simulation. When `method` is specified, the result object will include a `pvalue` attribute and not attributes `critical_value`, `significance_level`, or `fit_result`. Beginning in 1.19.0, these other attributes will no longer be available, and a p-value will always be computed according to one of the available `method` options.
-  res_1 = anderson(grupo_1, dist='norm')
 </pre></div>
 </div>
 </div>
@@ -1335,7 +1372,7 @@ Resultado: Rechaza H0 (distribuciones distintas)
 </section>
 </section>
 <section id="variable-respuesta-frente-a-variables-categoricas">
-<h2>3. Variable respuesta frente a variables categóricas<a class="headerlink" href="#variable-respuesta-frente-a-variables-categoricas" title="Link to this heading">#</a></h2>
+<h2>7. Variable respuesta frente a variables categóricas<a class="headerlink" href="#variable-respuesta-frente-a-variables-categoricas" title="Link to this heading">#</a></h2>
 <p>Para cada variable categórica se construirá una tabla de frecuencias y porcentajes por grupo de <code class="docutils literal notranslate"><span class="pre">Diabetes</span></code>, un gráfico de barras agrupadas y la prueba chi-cuadrado de independencia para evaluar si existe asociación entre dicha variable y la condición de diabetes.</p>
 <section id="variable-pa-alta-presion-arterial-alta">
 <h3>Variable <code class="docutils literal notranslate"><span class="pre">PA_alta</span></code> (presión arterial alta)<a class="headerlink" href="#variable-pa-alta-presion-arterial-alta" title="Link to this heading">#</a></h3>
@@ -1420,7 +1457,7 @@ Resultado: Rechaza H0 (distribuciones distintas)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                  <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
     <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
@@ -1433,13 +1470,25 @@ Resultado: Rechaza H0 (distribuciones distintas)
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.28</span><span class="p">)</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'PA_alta'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2baccd920509feed1ca58cc909b788a995b9d7f60064a33b4742cb8f11cf31d6.png" src="../_images/2baccd920509feed1ca58cc909b788a995b9d7f60064a33b4742cb8f11cf31d6.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/aa451dcf15d61bd259633d0ca359b629316184ecdabf89e92c45a1ac229564de.png" src="../_images/aa451dcf15d61bd259633d0ca359b629316184ecdabf89e92c45a1ac229564de.png" />
 </div>
 </div>
 <p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">PA_alta</span></code> es No (61.6%), mientras que en el grupo con diabetes la más frecuente es Sí (75.2%). La proporción de pacientes en la categoría ‘Sí’ (o equivalente) es de 38.4% en el grupo sin diabetes frente a 75.2% en el grupo con diabetes, lo que evidencia una diferencia entre ambos grupos.</p>
@@ -1550,7 +1599,7 @@ Resultado: Rechaza H0 (dependientes)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                  <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
     <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
@@ -1563,13 +1612,25 @@ Resultado: Rechaza H0 (dependientes)
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.28</span><span class="p">)</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'col_alto'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e263786b636edeb8d3276a3da8c3b2b16b6ac46ac1109f7bab645a3479709ab4.png" src="../_images/e263786b636edeb8d3276a3da8c3b2b16b6ac46ac1109f7bab645a3479709ab4.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/e0ae79bb90ebe76d77c8ce57e7f0eaf82ec0013ac7dfa572887146fc5ccb3ac0.png" src="../_images/e0ae79bb90ebe76d77c8ce57e7f0eaf82ec0013ac7dfa572887146fc5ccb3ac0.png" />
 </div>
 </div>
 <p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">col_alto</span></code> es No (61.1%), mientras que en el grupo con diabetes la más frecuente es Sí (67.0%). La proporción de pacientes en la categoría ‘Sí’ (o equivalente) es de 38.9% en el grupo sin diabetes frente a 67.0% en el grupo con diabetes, lo que evidencia una diferencia entre ambos grupos.</p>
@@ -1680,7 +1741,7 @@ Resultado: Rechaza H0 (dependientes)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                  <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
     <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
@@ -1693,13 +1754,25 @@ Resultado: Rechaza H0 (dependientes)
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.28</span><span class="p">)</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'CheckCol'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/38ba194a6463de0da59d80e0868d6e7c0bbded2643e555e701728e8135ae1eb5.png" src="../_images/38ba194a6463de0da59d80e0868d6e7c0bbded2643e555e701728e8135ae1eb5.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/682e7cee646872b2d5fd66152dfb306a85b4573921b272caca850af8eb268e37.png" src="../_images/682e7cee646872b2d5fd66152dfb306a85b4573921b272caca850af8eb268e37.png" />
 </div>
 </div>
 <p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">CheckCol</span></code> es Sí (95.6%), mientras que en el grupo con diabetes la más frecuente es Sí (99.3%). La proporción de pacientes en la categoría ‘Sí’ (o equivalente) es de 95.6% en el grupo sin diabetes frente a 99.3% en el grupo con diabetes, lo que evidencia una diferencia entre ambos grupos.</p>
@@ -1810,7 +1883,7 @@ Resultado: Rechaza H0 (dependientes)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                  <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
     <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
@@ -1823,13 +1896,25 @@ Resultado: Rechaza H0 (dependientes)
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.28</span><span class="p">)</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'Fumador'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5b03a87fd635f29df04e4f47a8373d77a6b8a6febd13f5def2e143dd2404ac30.png" src="../_images/5b03a87fd635f29df04e4f47a8373d77a6b8a6febd13f5def2e143dd2404ac30.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/96ebed1afd1598b36fcd3e6eb407be1f0d05a026551744d0a2716112b295b74c.png" src="../_images/96ebed1afd1598b36fcd3e6eb407be1f0d05a026551744d0a2716112b295b74c.png" />
 </div>
 </div>
 <p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">Fumador</span></code> es No (55.7%), mientras que en el grupo con diabetes la más frecuente es Sí (51.9%). La proporción de pacientes en la categoría ‘Sí’ (o equivalente) es de 44.3% en el grupo sin diabetes frente a 51.9% en el grupo con diabetes, lo que evidencia una diferencia entre ambos grupos.</p>
@@ -1940,7 +2025,7 @@ Resultado: Rechaza H0 (dependientes)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                  <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
     <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
@@ -1953,13 +2038,25 @@ Resultado: Rechaza H0 (dependientes)
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.28</span><span class="p">)</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'derrame'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c3a6078105840b7c063abcb4e522b4a8646b908c8431feebce5d1486d57a813d.png" src="../_images/c3a6078105840b7c063abcb4e522b4a8646b908c8431feebce5d1486d57a813d.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/dca0d147c0a29b0409241344b73ad326963a054f3b1a14d0065d2a8bd6bc6537.png" src="../_images/dca0d147c0a29b0409241344b73ad326963a054f3b1a14d0065d2a8bd6bc6537.png" />
 </div>
 </div>
 <p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">derrame</span></code> es No (96.7%), mientras que en el grupo con diabetes la más frecuente es No (90.7%). La proporción de pacientes en la categoría ‘Sí’ (o equivalente) es de 3.3% en el grupo sin diabetes frente a 9.3% en el grupo con diabetes, lo que evidencia una diferencia entre ambos grupos.</p>
@@ -2070,7 +2167,7 @@ Resultado: Rechaza H0 (dependientes)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                  <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
     <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
@@ -2083,13 +2180,25 @@ Resultado: Rechaza H0 (dependientes)
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.28</span><span class="p">)</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'EnfCardi'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d76d0bf5b54af032c2388dd8b72dc6a616969e84ea122b9514c33c1d1160e05b.png" src="../_images/d76d0bf5b54af032c2388dd8b72dc6a616969e84ea122b9514c33c1d1160e05b.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/85de83b997a48123464fe94e6d5845cee0697a9225fbb89d716a8de0c881682a.png" src="../_images/85de83b997a48123464fe94e6d5845cee0697a9225fbb89d716a8de0c881682a.png" />
 </div>
 </div>
 <p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">EnfCardi</span></code> es No (92.5%), mientras que en el grupo con diabetes la más frecuente es No (77.6%). La proporción de pacientes en la categoría ‘Sí’ (o equivalente) es de 7.5% en el grupo sin diabetes frente a 22.4% en el grupo con diabetes, lo que evidencia una diferencia entre ambos grupos.</p>
@@ -2200,7 +2309,7 @@ Resultado: Rechaza H0 (dependientes)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                  <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
     <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
@@ -2213,13 +2322,25 @@ Resultado: Rechaza H0 (dependientes)
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.28</span><span class="p">)</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'ActFisi'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ce9a52d972660549f740cda420e9623c16417efa0f26a3c37792ee055356f3b1.png" src="../_images/ce9a52d972660549f740cda420e9623c16417efa0f26a3c37792ee055356f3b1.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/7eebad2f0745935388a635f963355cecd5c453ec76ed9921c941a582805030b7.png" src="../_images/7eebad2f0745935388a635f963355cecd5c453ec76ed9921c941a582805030b7.png" />
 </div>
 </div>
 <p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">ActFisi</span></code> es Sí (76.7%), mientras que en el grupo con diabetes la más frecuente es Sí (62.9%). La proporción de pacientes en la categoría ‘Sí’ (o equivalente) es de 76.7% en el grupo sin diabetes frente a 62.9% en el grupo con diabetes, lo que evidencia una diferencia entre ambos grupos.</p>
@@ -2330,7 +2451,7 @@ Resultado: Rechaza H0 (dependientes)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                  <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
     <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
@@ -2343,13 +2464,25 @@ Resultado: Rechaza H0 (dependientes)
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.28</span><span class="p">)</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'fruta'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/db1e29e784ccbaf40588299e78d5e26c3b11aa13d92a3608368a845cdafda455.png" src="../_images/db1e29e784ccbaf40588299e78d5e26c3b11aa13d92a3608368a845cdafda455.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/ec340b32bf075d56a146a3b3ec0e35cfc2d87b5201ecb298b7d24862b1187d53.png" src="../_images/ec340b32bf075d56a146a3b3ec0e35cfc2d87b5201ecb298b7d24862b1187d53.png" />
 </div>
 </div>
 <p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">fruta</span></code> es Sí (62.8%), mientras que en el grupo con diabetes la más frecuente es Sí (58.4%). La proporción de pacientes en la categoría ‘Sí’ (o equivalente) es de 62.8% en el grupo sin diabetes frente a 58.4% en el grupo con diabetes, lo que evidencia una diferencia entre ambos grupos.</p>
@@ -2460,7 +2593,7 @@ Resultado: Rechaza H0 (dependientes)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                  <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
     <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
@@ -2473,13 +2606,25 @@ Resultado: Rechaza H0 (dependientes)
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.28</span><span class="p">)</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'vegetales'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/df47e615de47ee5295c8f97b1001c4575f9076785859d77f42d9f0e3888364ab.png" src="../_images/df47e615de47ee5295c8f97b1001c4575f9076785859d77f42d9f0e3888364ab.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/7db1cb0d539636ed7db13bb5bf2eef2922baddf3bd6ddf839fe876a05c5a0016.png" src="../_images/7db1cb0d539636ed7db13bb5bf2eef2922baddf3bd6ddf839fe876a05c5a0016.png" />
 </div>
 </div>
 <p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">vegetales</span></code> es Sí (81.4%), mientras que en el grupo con diabetes la más frecuente es Sí (75.5%). La proporción de pacientes en la categoría ‘Sí’ (o equivalente) es de 81.4% en el grupo sin diabetes frente a 75.5% en el grupo con diabetes, lo que evidencia una diferencia entre ambos grupos.</p>
@@ -2590,7 +2735,7 @@ Resultado: Rechaza H0 (dependientes)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                  <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
     <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
@@ -2603,13 +2748,25 @@ Resultado: Rechaza H0 (dependientes)
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.28</span><span class="p">)</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'Alcohlico'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bb907ddd2f8222a685973ccd9210b210da29eff7e83c6f8c41c6a258ff14185e.png" src="../_images/bb907ddd2f8222a685973ccd9210b210da29eff7e83c6f8c41c6a258ff14185e.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/33d3827eeee863c37b64aebc309fa9d2010f54728ced971de499fa23723a85b6.png" src="../_images/33d3827eeee863c37b64aebc309fa9d2010f54728ced971de499fa23723a85b6.png" />
 </div>
 </div>
 <p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">Alcohlico</span></code> es No (93.6%), mientras que en el grupo con diabetes la más frecuente es No (97.6%). La proporción de pacientes en la categoría ‘Sí’ (o equivalente) es de 6.4% en el grupo sin diabetes frente a 2.4% en el grupo con diabetes, lo que evidencia una diferencia entre ambos grupos.</p>
@@ -2720,7 +2877,7 @@ Resultado: Rechaza H0 (dependientes)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                  <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
     <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
@@ -2733,13 +2890,25 @@ Resultado: Rechaza H0 (dependientes)
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.28</span><span class="p">)</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'eps'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5bbe37dc423a65b01b7160846884d76e92db34e01b15114d8d82d9f16e7ec4e7.png" src="../_images/5bbe37dc423a65b01b7160846884d76e92db34e01b15114d8d82d9f16e7ec4e7.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/745ff2737385148d923946c17ecf7f080fe9a9479d2af5773aff4f08a3c45de7.png" src="../_images/745ff2737385148d923946c17ecf7f080fe9a9479d2af5773aff4f08a3c45de7.png" />
 </div>
 </div>
 <p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">eps</span></code> es Sí (94.8%), mientras que en el grupo con diabetes la más frecuente es Sí (96.0%). La proporción de pacientes en la categoría ‘Sí’ (o equivalente) es de 94.8% en el grupo sin diabetes frente a 96.0% en el grupo con diabetes, lo que evidencia una diferencia entre ambos grupos.</p>
@@ -2850,7 +3019,7 @@ Resultado: Rechaza H0 (dependientes)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                  <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
     <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
@@ -2863,13 +3032,25 @@ Resultado: Rechaza H0 (dependientes)
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.28</span><span class="p">)</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'AfordabilidadMedica'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d1aad282423a7259b950cd7ba5193e63c9dd6e5045b4a939d156ed50f13c48bb.png" src="../_images/d1aad282423a7259b950cd7ba5193e63c9dd6e5045b4a939d156ed50f13c48bb.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/8e5c8ced66d25c49304c055746ced6c84663d81d18f4170c756141e1b05300ca.png" src="../_images/8e5c8ced66d25c49304c055746ced6c84663d81d18f4170c756141e1b05300ca.png" />
 </div>
 </div>
 <p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">AfordabilidadMedica</span></code> es No (91.5%), mientras que en el grupo con diabetes la más frecuente es No (89.3%). La proporción de pacientes en la categoría ‘Sí’ (o equivalente) es de 8.5% en el grupo sin diabetes frente a 10.7% en el grupo con diabetes, lo que evidencia una diferencia entre ambos grupos.</p>
@@ -3022,7 +3203,7 @@ Resultado: Rechaza H0 (dependientes)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                  <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
     <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
@@ -3035,13 +3216,25 @@ Resultado: Rechaza H0 (dependientes)
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.28</span><span class="p">)</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'SaludG'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/52e9a62e5e941763c254c8a96bde011fd74d0162f71bff208fe060d22cf952c1.png" src="../_images/52e9a62e5e941763c254c8a96bde011fd74d0162f71bff208fe060d22cf952c1.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/847c3ec25640744ce13fabf1897c31f08d391089c30a9e8a2145e24afea16493.png" src="../_images/847c3ec25640744ce13fabf1897c31f08d391089c30a9e8a2145e24afea16493.png" />
 </div>
 </div>
 <p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">SaludG</span></code> es Muy buena (37.8%), mientras que en el grupo con diabetes la más frecuente es Buena (38.0%). Al comparar ambos grupos se observa un desplazamiento en la distribución de las categorías entre quienes tienen diabetes y quienes no, lo que sugiere una relación entre esta variable ordinal y la condición de diabetes.</p>
@@ -3152,7 +3345,7 @@ Resultado: Rechaza H0 (dependientes)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                  <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
     <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
@@ -3165,13 +3358,25 @@ Resultado: Rechaza H0 (dependientes)
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.28</span><span class="p">)</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'DificultadCaminar'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/76a74e926a8f4cd654a0c7b50f3fcf3a77245697505d41c1463e82e85366c969.png" src="../_images/76a74e926a8f4cd654a0c7b50f3fcf3a77245697505d41c1463e82e85366c969.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/10a93d47322b95d52e310e77cb580e4614b58a1053420cc4a15d02e1b9e667c1.png" src="../_images/10a93d47322b95d52e310e77cb580e4614b58a1053420cc4a15d02e1b9e667c1.png" />
 </div>
 </div>
 <p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">DificultadCaminar</span></code> es No (86.0%), mientras que en el grupo con diabetes la más frecuente es No (62.6%). La proporción de pacientes en la categoría ‘Sí’ (o equivalente) es de 14.0% en el grupo sin diabetes frente a 37.4% en el grupo con diabetes, lo que evidencia una diferencia entre ambos grupos.</p>
@@ -3282,7 +3487,7 @@ Resultado: Rechaza H0 (dependientes)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                  <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
     <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
@@ -3295,13 +3500,25 @@ Resultado: Rechaza H0 (dependientes)
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.28</span><span class="p">)</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'Genero'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/df54df0a4e0d5a0f10a6aa85c93209aceaf694628fb1e819379e2de09fd355b7.png" src="../_images/df54df0a4e0d5a0f10a6aa85c93209aceaf694628fb1e819379e2de09fd355b7.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/132ec51dae621bca90cbdde9a5d30f2e1d7436cc35ad5b2d5f2b04df8a174583.png" src="../_images/132ec51dae621bca90cbdde9a5d30f2e1d7436cc35ad5b2d5f2b04df8a174583.png" />
 </div>
 </div>
 <p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">Genero</span></code> es Mujer (56.5%), mientras que en el grupo con diabetes la más frecuente es Mujer (52.3%). La proporción de pacientes en la categoría ‘Sí’ (o equivalente) es de 43.5% en el grupo sin diabetes frente a 47.7% en el grupo con diabetes, lo que evidencia una diferencia entre ambos grupos.</p>
@@ -3564,28 +3781,67 @@ Resultado: Rechaza H0 (dependientes)
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_plot</span> <span class="o">=</span> <span class="n">tabla_Edad</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">df_plot</span><span class="p">[</span><span class="s1">'grupo'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_plot</span><span class="p">[</span><span class="n">target</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">etiquetas_diabetes</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># 1. Aumentamos el tamaño de la figura para mayor separación horizontal y vertical</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># 2. Ajustamos el padding y rotación opcional de las etiquetas sobre las barras si están muy apretadas</span>
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
-    <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
-    <span class="n">porcentajes</span> <span class="o">=</span> <span class="n">df_plot</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_plot</span><span class="p">[</span><span class="s1">'grupo'</span><span class="p">]</span> <span class="o">==</span> <span class="n">grupo_lbl</span><span class="p">,</span> <span class="s1">'porcentaje'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">container</span><span class="o">.</span><span class="n">datavalues</span><span class="p">,</span> <span class="n">porcentajes</span><span class="p">)]</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+  <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
+  <span class="c1"># Verificamos si el contenedor tiene etiquetas válidas asociadas al grupo</span>
+  <span class="k">if</span> <span class="n">grupo_lbl</span><span class="p">:</span>
+    <span class="n">porcentajes</span> <span class="o">=</span> <span class="n">df_plot</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+        <span class="n">df_plot</span><span class="p">[</span><span class="s1">'grupo'</span><span class="p">]</span> <span class="o">==</span> <span class="n">grupo_lbl</span><span class="p">,</span> <span class="s1">'porcentaje'</span>
+    <span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%)'</span>
+        <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">container</span><span class="o">.</span><span class="n">datavalues</span><span class="p">,</span> <span class="n">porcentajes</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span>
+        <span class="n">container</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Distribución de Edad según Diabetes'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Edad'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Distribución de Edad según Diabetes'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Edad'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span>
+    <span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">'upper right'</span><span class="p">)</span>
+
+<span class="c1"># 3. Ampliamos el margen superior del eje Y para que las anotaciones de prevalencia tengan espacio</span>
+<span class="n">max_n</span> <span class="o">=</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_n</span> <span class="o">*</span> <span class="mf">1.45</span><span class="p">)</span>
+
+<span class="c1"># 4. Llamamos a tu función de anotación asegurando que dibuje más arriba</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'Edad'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/47a409c0477a119303c7c23fc9279a0452906b0a59f3b06051989e9d44657f91.png" src="../_images/47a409c0477a119303c7c23fc9279a0452906b0a59f3b06051989e9d44657f91.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/542a6e2718ee1b44b4bba29b436eef9e60a85fb8db55bd433cf461583ca020ed.png" src="../_images/542a6e2718ee1b44b4bba29b436eef9e60a85fb8db55bd433cf461583ca020ed.png" />
 </div>
 </div>
 <p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">Edad</span></code> es 9 (12.3%), mientras que en el grupo con diabetes la más frecuente es 10 (18.5%). Al comparar ambos grupos se observa un desplazamiento en la distribución de las categorías entre quienes tienen diabetes y quienes no, lo que sugiere una relación entre esta variable ordinal y la condición de diabetes.</p>
@@ -3752,7 +4008,7 @@ Resultado: Rechaza H0 (dependientes)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                  <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
     <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
@@ -3765,13 +4021,25 @@ Resultado: Rechaza H0 (dependientes)
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">*</span> <span class="mf">1.28</span><span class="p">)</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'Educacion'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2abda4a4fad1c3d04f700f86b4daaa8127837e2d52fea4ad1be6bb2b4bb04d68.png" src="../_images/2abda4a4fad1c3d04f700f86b4daaa8127837e2d52fea4ad1be6bb2b4bb04d68.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/c4b6f268af56852041ddc751690f429697a35a62e165b065b874618cca089132.png" src="../_images/c4b6f268af56852041ddc751690f429697a35a62e165b065b874618cca089132.png" />
 </div>
 </div>
 <p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">Educacion</span></code> es Universitario graduado (42.5%), mientras que en el grupo con diabetes la más frecuente es Secundaria completa (31.4%). Al comparar ambos grupos se observa un desplazamiento en la distribución de las categorías entre quienes tienen diabetes y quienes no, lo que sugiere una relación entre esta variable ordinal y la condición de diabetes.</p>
@@ -3964,31 +4232,69 @@ Resultado: Rechaza H0 (dependientes)
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_plot</span> <span class="o">=</span> <span class="n">tabla_Ingresos</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">df_plot</span><span class="p">[</span><span class="s1">'grupo'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_plot</span><span class="p">[</span><span class="n">target</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">etiquetas_diabetes</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
-                  <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">],</span> <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># 1. Ampliamos las dimensiones de la figura para mayor espacio y legibilidad</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">'categoria'</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s1">'grupo'</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df_plot</span><span class="p">,</span>
+    <span class="n">palette</span><span class="o">=</span><span class="n">paleta_lista</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">dodge</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># 2. Ajustamos las etiquetas de las barras con un tamaño y separación adecuados</span>
 <span class="k">for</span> <span class="n">container</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">containers</span><span class="p">:</span>
-    <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
-    <span class="n">porcentajes</span> <span class="o">=</span> <span class="n">df_plot</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_plot</span><span class="p">[</span><span class="s1">'grupo'</span><span class="p">]</span> <span class="o">==</span> <span class="n">grupo_lbl</span><span class="p">,</span> <span class="s1">'porcentaje'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span> <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">container</span><span class="o">.</span><span class="n">datavalues</span><span class="p">,</span> <span class="n">porcentajes</span><span class="p">)]</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">container</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+  <span class="n">grupo_lbl</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
+  <span class="k">if</span> <span class="n">grupo_lbl</span><span class="p">:</span>
+    <span class="n">porcentajes</span> <span class="o">=</span> <span class="n">df_plot</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+        <span class="n">df_plot</span><span class="p">[</span><span class="s1">'grupo'</span><span class="p">]</span> <span class="o">==</span> <span class="n">grupo_lbl</span><span class="p">,</span> <span class="s1">'porcentaje'</span>
+    <span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%)'</span>
+        <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">container</span><span class="o">.</span><span class="n">datavalues</span><span class="p">,</span> <span class="n">porcentajes</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span>
+        <span class="n">container</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Distribución de Ingresos según Diabetes'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Ingresos'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Distribución de Ingresos según Diabetes'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Ingresos'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Cantidad de pacientes'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span>
+    <span class="n">mticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Grupo'</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">'upper left'</span><span class="p">)</span>
+
+<span class="c1"># 3. Damos más margen superior en el eje Y para alojar correctamente la prevalencia</span>
+<span class="n">max_n</span> <span class="o">=</span> <span class="n">df_plot</span><span class="p">[</span><span class="s1">'n'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_n</span> <span class="o">*</span> <span class="mf">1.45</span><span class="p">)</span>
+
+<span class="c1"># 4. Llamada a tu función de anotación de prevalencia</span>
+<span class="n">anotar_prevalencia</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">df_plot</span><span class="p">,</span> <span class="s1">'Ingresos'</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8fa01680b419b2ba213ce0934d40f620cdc96ef52d0232a0ac6f84df41fd819d.png" src="../_images/8fa01680b419b2ba213ce0934d40f620cdc96ef52d0232a0ac6f84df41fd819d.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+c:\Users\angel\miniconda3\envs\dataviz202630_venv\lib\site-packages\seaborn\_oldcore.py:1498: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if pd.api.types.is_categorical_dtype(vector):
+</pre></div>
+</div>
+<img alt="../_images/8f6810cb666e397280fe45d5cc92f6d5b7304b67d40f8de9479875a9ccb3087b.png" src="../_images/8f6810cb666e397280fe45d5cc92f6d5b7304b67d40f8de9479875a9ccb3087b.png" />
 </div>
 </div>
-<p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">Ingresos</span></code> es &gt;= <span class="math notranslate nohighlight">\(75,000 (36.1%), mientras que en el grupo con diabetes la más frecuente es &gt;= \)</span>75,000 (20.1%). Al comparar ambos grupos se observa un desplazamiento en la distribución de las categorías entre quienes tienen diabetes y quienes no, lo que sugiere una relación entre esta variable ordinal y la condición de diabetes.</p>
+<p>En el grupo sin diabetes, la categoría más frecuente de <code class="docutils literal notranslate"><span class="pre">Ingresos</span></code> es &gt;= $75,000 (36.1%), mientras que en el grupo con diabetes la más frecuente es &gt;= $75,000 (20.1%). Al comparar ambos grupos se observa un desplazamiento en la distribución de las categorías entre quienes tienen diabetes y quienes no, lo que sugiere una relación entre esta variable ordinal y la condición de diabetes.</p>
 <p><strong>Prueba de independencia (chi-cuadrado)</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4015,9 +4321,11 @@ Resultado: Rechaza H0 (dependientes)
 </section>
 </section>
 <section id="conclusion">
-<h2>4. Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<h2>8. Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
 <p>El análisis bivariado confirma que la condición de diabetes está asociada, de manera estadísticamente significativa, con todas las variables numéricas y categóricas evaluadas. Entre las variables numéricas, el índice de masa corporal (<code class="docutils literal notranslate"><span class="pre">IMC</span></code>) muestra la diferencia más clara entre grupos: los pacientes con diabetes presentan, en promedio, un IMC (32.0) considerablemente mayor que los pacientes sin diabetes (27.9). Las variables <code class="docutils literal notranslate"><span class="pre">SaludM</span></code> y <code class="docutils literal notranslate"><span class="pre">SaludF</span></code>, que reflejan días de salud mental y física percibida como no buena, también son mayores en el grupo con diabetes, aunque con distribuciones muy concentradas en cero y colas largas, lo que llevó a usar pruebas no paramétricas (Mann-Whitney) tras confirmar la ausencia de normalidad con Anderson-Darling.</p>
 <p>En cuanto a las variables categóricas, condiciones de salud como presión arterial alta, colesterol alto, enfermedad coronaria, derrame cerebral y dificultad para caminar muestran proporciones notablemente mayores en el grupo con diabetes, así como una peor percepción de salud general (<code class="docutils literal notranslate"><span class="pre">SaludG</span></code>). De igual forma, variables sociodemográficas como edad, nivel educativo e ingresos muestran patrones diferenciados entre ambos grupos: la diabetes tiende a concentrarse en categorías de mayor edad y de menor nivel educativo e ingresos. Todas las pruebas chi-cuadrado resultaron significativas (p &lt; 0.05), lo que indica que ninguna de las variables categóricas analizadas es independiente de la condición de diabetes en este conjunto de datos.</p>
+<p><strong>Referencias</strong></p>
+<p><a class="reference external" href="https://www.kaggle.com/datasets/alexteboul/diabetes-health-indicators-dataset?resource=download">https://www.kaggle.com/datasets/alexteboul/diabetes-health-indicators-dataset?resource=download</a></p>
 </section>
 </section>
 
@@ -4052,7 +4360,7 @@ Resultado: Rechaza H0 (dependientes)
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="eda_univariado_diabetes.html"
+       href="eda_univariado_diabetes2.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
@@ -4078,15 +4386,19 @@ Resultado: Rechaza H0 (dependientes)
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias">0. Librerías</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-preparacion-de-datos">1. Carga y preparación de datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-respuesta-frente-a-variables-numericas">2. Variable respuesta frente a variables numéricas</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">1. Introducción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos">2. Objetivos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marco-teorico">3. Marco Teórico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologia">4. Metodología</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias">Librerías</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-preparacion-de-datos">5. Carga y preparación de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-respuesta-frente-a-variables-numericas">6. Variable respuesta frente a variables numéricas</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-imc-indice-de-masa-corporal">Variable <code class="docutils literal notranslate"><span class="pre">IMC</span></code> (Índice de Masa Corporal)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-saludm-dias-de-salud-mental-no-buena-en-los-ultimos-30-dias">Variable <code class="docutils literal notranslate"><span class="pre">SaludM</span></code> (días de salud mental no buena en los últimos 30 días)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-saludf-dias-de-salud-fisica-no-buena-en-los-ultimos-30-dias">Variable <code class="docutils literal notranslate"><span class="pre">SaludF</span></code> (días de salud física no buena en los últimos 30 días)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-respuesta-frente-a-variables-categoricas">3. Variable respuesta frente a variables categóricas</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-respuesta-frente-a-variables-categoricas">7. Variable respuesta frente a variables categóricas</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-pa-alta-presion-arterial-alta">Variable <code class="docutils literal notranslate"><span class="pre">PA_alta</span></code> (presión arterial alta)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-col-alto-colesterol-alto">Variable <code class="docutils literal notranslate"><span class="pre">col_alto</span></code> (colesterol alto)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-checkcol-chequeo-de-colesterol-en-los-ultimos-5-anos">Variable <code class="docutils literal notranslate"><span class="pre">CheckCol</span></code> (chequeo de colesterol en los últimos 5 años)</a></li>
@@ -4107,7 +4419,7 @@ Resultado: Rechaza H0 (dependientes)
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-ingresos-nivel-de-ingresos-anual-del-hogar">Variable <code class="docutils literal notranslate"><span class="pre">Ingresos</span></code> (nivel de ingresos anual del hogar)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">4. Conclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">8. Conclusión</a></li>
 </ul>
   </nav></div>
 
