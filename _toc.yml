@@ -1,4 +1,4 @@
 format: jb-book
-root: notebooks/eda_univariado_diabetes
+root: notebooks/eda_univariado_diabetes2
 chapters:
   - file: notebooks/eda_bivariado_diabetes2
