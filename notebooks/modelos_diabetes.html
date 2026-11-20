@@ -1,0 +1,2127 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Modelos de Clasificación &#8212; Análisis Exploratorio Bivariado - Diabetes</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/modelos_diabetes';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="eda_univariado_diabetes2.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Análisis Exploratorio Bivariado - Diabetes</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="eda_bivariado_diabetes2.html">Análisis Exploratorio Bivariado</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/modelos_diabetes.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Modelos de Clasificación</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">1. Introducción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos">2. Objetivos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marco-teorico">3. Marco Teórico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologia">4. Metodología</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias">Librerías</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-preparacion-de-datos">5. Carga y preparación de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particion-en-entrenamiento-y-prueba">6. Partición en entrenamiento y prueba</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-de-los-modelos">7. Definición de los modelos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-y-evaluacion-en-el-conjunto-de-prueba">8. Entrenamiento y evaluación en el conjunto de prueba</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-cruzada">9. Validación cruzada</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-roc">10. Curvas ROC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices-de-confusion">11. Matrices de confusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-sobreajuste">12. Análisis de sobreajuste</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#efecto-del-umbral-de-decision">13. Efecto del umbral de decisión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibracion-y-ajuste-a-la-prevalencia-real">14. Calibración y ajuste a la prevalencia real</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-los-modelos">15. Interpretación de los modelos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-por-permutacion-del-mejor-modelo">Importancia por permutación del mejor modelo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#odds-ratios-de-la-regresion-logistica">Odds ratios de la Regresión Logística</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primeras-reglas-del-arbol-de-decision">Primeras reglas del Árbol de Decisión</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-del-modelo-final">16. Selección del modelo final</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">17. Conclusiones</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="modelos-de-clasificacion">
+<h1>Modelos de Clasificación<a class="headerlink" href="#modelos-de-clasificacion" title="Link to this heading">#</a></h1>
+<p>En este notebook se construyen, evalúan y comparan los modelos de clasificación utilizados para estimar la probabilidad de que una persona tenga diabetes o prediabetes a partir de los indicadores de salud de la encuesta BRFSS 2015. Es la continuación del análisis univariado y bivariado: aquí se usan las mismas variables, ya exploradas, como insumo de los modelos que alimentan el tablero <strong>GlucoRisk</strong>.</p>
+<section id="introduccion">
+<h2>1. Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
+<p>El análisis exploratorio mostró que variables como la salud general percibida, el índice de masa corporal, la edad, la presión arterial alta y el colesterol alto se asocian de forma significativa con la diabetes. Sin embargo, una asociación individual no dice qué tan bien se puede <strong>predecir</strong> la condición de una persona cuando se consideran todas las variables al mismo tiempo.</p>
+<p>Para responder esa pregunta se entrenan seis algoritmos de aprendizaje supervisado con supuestos distintos: Regresión Logística, Árbol de Decisión, Random Forest, XGBoost, K vecinos más cercanos (KNN) y Naive Bayes. Todos se evalúan con los mismos datos y las mismas métricas, de modo que la comparación sea justa. El objetivo práctico es contar con un modelo de <strong>tamizaje</strong>: una herramienta que, a partir de preguntas de una encuesta y sin exámenes de laboratorio, ayude a priorizar a qué personas conviene hacerles una prueba de glucosa.</p>
+</section>
+<section id="objetivos">
+<h2>2. Objetivos<a class="headerlink" href="#objetivos" title="Link to this heading">#</a></h2>
+<p><strong>Objetivo general</strong></p>
+<p>Construir y comparar modelos de clasificación que estimen la probabilidad de diabetes o prediabetes a partir de las 21 variables del conjunto de datos <code class="docutils literal notranslate"><span class="pre">diabetes_binary_5050split_health_indicators_BRFSS2015</span></code>, y seleccionar el de mejor desempeño.</p>
+<p><strong>Objetivos específicos</strong></p>
+<ul class="simple">
+<li><p>Entrenar seis clasificadores con una partición estratificada de entrenamiento y prueba.</p></li>
+<li><p>Evaluar cada modelo con exactitud, precisión, sensibilidad (recall), F1 y ROC-AUC, y estimar su estabilidad mediante validación cruzada.</p></li>
+<li><p>Analizar el sobreajuste comparando el desempeño en entrenamiento, validación cruzada y prueba.</p></li>
+<li><p>Estudiar el efecto del umbral de decisión y la calibración de las probabilidades, incluido el ajuste a la prevalencia real de la población.</p></li>
+<li><p>Identificar qué variables pesan más en las predicciones mediante importancia por permutación y odds ratios.</p></li>
+</ul>
+</section>
+<section id="marco-teorico">
+<h2>3. Marco Teórico<a class="headerlink" href="#marco-teorico" title="Link to this heading">#</a></h2>
+<p><strong>Clasificación supervisada</strong>: tarea de aprendizaje automático en la que, a partir de un conjunto de ejemplos con la respuesta conocida, se aprende una función que asigna una clase a nuevas observaciones. En este caso la respuesta es binaria (<code class="docutils literal notranslate"><span class="pre">Diabetes</span></code> = 1 con diabetes o prediabetes, <code class="docutils literal notranslate"><span class="pre">Diabetes</span></code> = 0 sin ella) y el modelo estima <span class="math notranslate nohighlight">\(P(y = 1 \mid x)\)</span>, la probabilidad de pertenecer a la clase positiva dado el vector de variables <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p><strong>Regresión Logística</strong>: modelo lineal generalizado que relaciona las variables con el logaritmo de los odds de la clase positiva:</p>
+<div class="math notranslate nohighlight">
+\[\log\frac{p}{1-p} = \beta_0 + \beta_1 x_1 + \dots + \beta_k x_k\]</div>
+<p>Su principal ventaja es la interpretabilidad: <span class="math notranslate nohighlight">\(e^{\beta_j}\)</span> es el <em>odds ratio</em> asociado a un aumento de una unidad en <span class="math notranslate nohighlight">\(x_j\)</span>. Cuando las variables están estandarizadas, el odds ratio corresponde a un aumento de una desviación estándar y los coeficientes son comparables entre sí.</p>
+<p><strong>Árbol de Decisión</strong>: divide el espacio de las variables mediante reglas sucesivas del tipo <em>si IMC &gt; 30 entonces…</em>, eligiendo en cada nodo la división que más reduce la impureza (índice de Gini). Es fácil de leer, pero es inestable y tiende a sobreajustarse si no se limita su profundidad.</p>
+<p><strong>Random Forest</strong>: ensamble de muchos árboles, cada uno entrenado sobre una muestra <em>bootstrap</em> de los datos y considerando un subconjunto aleatorio de variables en cada división. La predicción final es el promedio de los árboles, lo que reduce la varianza respecto a un árbol individual (Breiman, 2001).</p>
+<p><strong>XGBoost</strong>: implementación de <em>gradient boosting</em> en la que los árboles se construyen de forma secuencial y cada uno corrige los errores de los anteriores, siguiendo el gradiente de la función de pérdida. Incluye regularización y submuestreo para controlar el sobreajuste (Chen y Guestrin, 2016).</p>
+<p><strong>K vecinos más cercanos (KNN)</strong>: clasifica una observación según la proporción de casos positivos entre sus <span class="math notranslate nohighlight">\(k\)</span> vecinos más cercanos en el espacio de las variables. No aprende parámetros, pero depende de la escala, por lo que las variables deben estandarizarse.</p>
+<p><strong>Naive Bayes gaussiano</strong>: aplica el teorema de Bayes suponiendo que las variables son independientes dentro de cada clase y que siguen una distribución normal. Ese supuesto rara vez se cumple, pero el modelo es rápido y sirve como línea base.</p>
+<p><strong>Métricas de evaluación</strong>: a partir de la matriz de confusión (verdaderos positivos VP, falsos positivos FP, verdaderos negativos VN y falsos negativos FN) se calculan:</p>
+<ul class="simple">
+<li><p><strong>Exactitud (accuracy)</strong> <span class="math notranslate nohighlight">\(= \frac{VP + VN}{n}\)</span>: proporción de aciertos. Es interpretable porque las clases están balanceadas.</p></li>
+<li><p><strong>Precisión</strong> <span class="math notranslate nohighlight">\(= \frac{VP}{VP + FP}\)</span>: de las personas que el modelo marca como positivas, cuántas lo son realmente.</p></li>
+<li><p><strong>Sensibilidad o recall</strong> <span class="math notranslate nohighlight">\(= \frac{VP}{VP + FN}\)</span>: de las personas con diabetes, cuántas detecta el modelo.</p></li>
+<li><p><strong>F1</strong>: media armónica de precisión y recall.</p></li>
+<li><p><strong>ROC-AUC</strong>: área bajo la curva que relaciona la tasa de verdaderos positivos con la de falsos positivos para todos los umbrales posibles. Equivale a la probabilidad de que un caso positivo elegido al azar reciba una probabilidad mayor que un caso negativo elegido al azar (Fawcett, 2006). No depende del umbral.</p></li>
+</ul>
+<p>En tamizaje se priorizan el <strong>ROC-AUC</strong> y el <strong>recall</strong>, porque dejar sin detectar a una persona con diabetes es más costoso que pedirle una prueba adicional a un falso positivo.</p>
+<p><strong>Validación cruzada</strong>: técnica que divide los datos de entrenamiento en <span class="math notranslate nohighlight">\(k\)</span> partes; el modelo se entrena <span class="math notranslate nohighlight">\(k\)</span> veces dejando cada vez una parte fuera para evaluarlo. La media de las <span class="math notranslate nohighlight">\(k\)</span> evaluaciones estima el desempeño esperado y su desviación estándar indica qué tan estable es el modelo.</p>
+<p><strong>Sobreajuste</strong>: ocurre cuando un modelo aprende detalles particulares de los datos de entrenamiento que no se repiten en datos nuevos. Se detecta cuando el desempeño en entrenamiento es claramente mayor que en validación o prueba.</p>
+<p><strong>Balance de clases y ajuste a la prevalencia</strong>: el conjunto de datos está balanceado (50% con diabetes y 50% sin ella), lo que permite que el modelo aprenda ambas clases por igual. La consecuencia es que sus probabilidades corresponden a una población donde la mitad tiene la condición. Si la prevalencia real es <span class="math notranslate nohighlight">\(\pi\)</span> (≈ 13.9% en el BRFSS 2015 completo), la probabilidad se corrige multiplicando los odds por el cociente de odds a priori (Saerens et al., 2002):</p>
+<div class="math notranslate nohighlight">
+\[\frac{p'}{1-p'} = \frac{p}{1-p}\cdot\frac{\pi/(1-\pi)}{0.5/0.5}\]</div>
+<p>Esta corrección cambia el valor de la probabilidad pero no el orden de las personas, por lo que el ROC-AUC no se modifica.</p>
+<p><strong>Importancia por permutación</strong>: mide cuánto empeora una métrica (aquí el ROC-AUC) cuando se desordenan al azar los valores de una variable, rompiendo su relación con la respuesta. Una caída grande indica que el modelo depende mucho de esa variable. Funciona con cualquier modelo.</p>
+</section>
+<section id="metodologia">
+<h2>4. Metodología<a class="headerlink" href="#metodologia" title="Link to this heading">#</a></h2>
+<p>El trabajo de modelado siguió estos pasos:</p>
+<ol class="arabic simple">
+<li><p><strong>Preparación de datos</strong>: se renombran las variables igual que en el análisis exploratorio y se eliminan los registros duplicados.</p></li>
+<li><p><strong>Partición</strong>: 80% de los datos para entrenamiento y 20% para prueba, de forma estratificada por la variable <code class="docutils literal notranslate"><span class="pre">Diabetes</span></code> y con semilla fija (<code class="docutils literal notranslate"><span class="pre">42</span></code>) para que los resultados sean reproducibles. El conjunto de prueba no se usa en ningún momento del entrenamiento.</p></li>
+<li><p><strong>Escalado</strong>: la Regresión Logística y KNN se entrenan dentro de un <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> con <code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code>, de modo que la media y la desviación estándar se calculan solo con los datos de entrenamiento. Los modelos basados en árboles y Naive Bayes no requieren escalado.</p></li>
+<li><p><strong>Entrenamiento</strong>: se ajustan los seis modelos con los hiperparámetros indicados en la sección 7.</p></li>
+<li><p><strong>Evaluación</strong>: se calculan las métricas en el conjunto de prueba con umbral 0.5, se estima el ROC-AUC con validación cruzada estratificada de 5 particiones y se comparan las curvas ROC y las matrices de confusión.</p></li>
+<li><p><strong>Diagnóstico</strong>: análisis de sobreajuste, del umbral de decisión y de la calibración de las probabilidades.</p></li>
+<li><p><strong>Interpretación</strong>: importancia por permutación del mejor modelo, odds ratios de la Regresión Logística y visualización de las primeras reglas del Árbol de Decisión.</p></li>
+<li><p><strong>Selección</strong>: el modelo final es el de mayor ROC-AUC en el conjunto de prueba, considerando también su estabilidad y su nivel de sobreajuste.</p></li>
+</ol>
+</section>
+<section id="librerias">
+<h2>Librerías<a class="headerlink" href="#librerias" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.ticker</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mticker</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">StratifiedKFold</span><span class="p">,</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span><span class="p">,</span> <span class="n">plot_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span>
+                             <span class="n">roc_auc_score</span><span class="p">,</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span>
+                             <span class="n">precision_recall_curve</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.calibration</span><span class="w"> </span><span class="kn">import</span> <span class="n">calibration_curve</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.inspection</span><span class="w"> </span><span class="kn">import</span> <span class="n">permutation_importance</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">xgboost</span><span class="w"> </span><span class="kn">import</span> <span class="n">XGBClassifier</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">'ignore'</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">'whitegrid'</span><span class="p">)</span>
+
+<span class="n">SEED</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">paleta</span> <span class="o">=</span> <span class="p">{</span><span class="mf">0.0</span><span class="p">:</span> <span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">:</span> <span class="s1">'#DD8452'</span><span class="p">}</span>
+<span class="n">etiquetas_diabetes</span> <span class="o">=</span> <span class="p">{</span><span class="mf">0.0</span><span class="p">:</span> <span class="s1">'Sin diabetes'</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">:</span> <span class="s1">'Con diabetes / prediabetes'</span><span class="p">}</span>
+<span class="n">COLORES_MODELOS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'XGBoost'</span><span class="p">:</span> <span class="s1">'#C44E52'</span><span class="p">,</span>
+    <span class="s1">'Random Forest'</span><span class="p">:</span> <span class="s1">'#4C72B0'</span><span class="p">,</span>
+    <span class="s1">'Regresión Logística'</span><span class="p">:</span> <span class="s1">'#DD8452'</span><span class="p">,</span>
+    <span class="s1">'Árbol de Decisión'</span><span class="p">:</span> <span class="s1">'#55A868'</span><span class="p">,</span>
+    <span class="s1">'KNN'</span><span class="p">:</span> <span class="s1">'#8172B3'</span><span class="p">,</span>
+    <span class="s1">'Naive Bayes'</span><span class="p">:</span> <span class="s1">'#937860'</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="carga-y-preparacion-de-datos">
+<h2>5. Carga y preparación de datos<a class="headerlink" href="#carga-y-preparacion-de-datos" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ruta válida tanto si el notebook se ejecuta desde la raíz del repositorio</span>
+<span class="c1"># como desde la carpeta notebooks/</span>
+<span class="n">nombre</span> <span class="o">=</span> <span class="s1">'diabetes_binary_5050split_health_indicators_BRFSS2015.csv'</span>
+<span class="n">candidatas</span> <span class="o">=</span> <span class="p">[</span><span class="n">Path</span><span class="p">(</span><span class="s1">'data'</span><span class="p">)</span> <span class="o">/</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'Data'</span><span class="p">)</span> <span class="o">/</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="s1">'..'</span><span class="p">)</span> <span class="o">/</span> <span class="s1">'data'</span> <span class="o">/</span> <span class="n">nombre</span><span class="p">]</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">candidatas</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">','</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span>
+    <span class="s1">'Diabetes_binary'</span><span class="p">:</span> <span class="s1">'Diabetes'</span><span class="p">,</span>
+    <span class="s1">'HighBP'</span><span class="p">:</span>         <span class="s1">'PA_alta'</span><span class="p">,</span>
+    <span class="s1">'HighChol'</span><span class="p">:</span>     <span class="s1">'col_alto'</span><span class="p">,</span>
+    <span class="s1">'CholCheck'</span><span class="p">:</span>   <span class="s1">'CheckCol'</span><span class="p">,</span>
+    <span class="s1">'BMI'</span><span class="p">:</span>  <span class="s1">'IMC'</span><span class="p">,</span>
+    <span class="s1">'Smoker'</span><span class="p">:</span>   <span class="s1">'Fumador'</span><span class="p">,</span>
+    <span class="s1">'Stroke'</span><span class="p">:</span>      <span class="s1">'derrame'</span><span class="p">,</span>
+    <span class="s1">'HeartDiseaseorAttack'</span><span class="p">:</span> <span class="s1">'EnfCardi'</span><span class="p">,</span>
+    <span class="s1">'PhysActivity'</span><span class="p">:</span>  <span class="s1">'ActFisi'</span><span class="p">,</span>
+    <span class="s1">'Fruits'</span><span class="p">:</span>    <span class="s1">'fruta'</span><span class="p">,</span>
+    <span class="s1">'Veggies'</span><span class="p">:</span>   <span class="s1">'vegetales'</span><span class="p">,</span>
+    <span class="s1">'HvyAlcoholConsump'</span><span class="p">:</span>     <span class="s1">'Alcohlico'</span><span class="p">,</span>
+    <span class="s1">'AnyHealthcare'</span><span class="p">:</span>        <span class="s1">'eps'</span><span class="p">,</span>
+    <span class="s1">'NoDocbcCost'</span><span class="p">:</span>    <span class="s1">'AfordabilidadMedica'</span><span class="p">,</span>
+    <span class="s1">'GenHlth'</span><span class="p">:</span>         <span class="s1">'SaludG'</span><span class="p">,</span>
+    <span class="s1">'MentHlth'</span><span class="p">:</span>        <span class="s1">'SaludM'</span><span class="p">,</span>
+    <span class="s1">'PhysHlth'</span><span class="p">:</span>        <span class="s1">'SaludF'</span><span class="p">,</span>
+    <span class="s1">'DiffWalk'</span><span class="p">:</span>        <span class="s1">'DificultadCaminar'</span><span class="p">,</span>
+    <span class="s1">'Sex'</span><span class="p">:</span> <span class="s1">'Genero'</span><span class="p">,</span>
+    <span class="s1">'Age'</span><span class="p">:</span> <span class="s1">'Edad'</span><span class="p">,</span>
+    <span class="s1">'Education'</span><span class="p">:</span> <span class="s1">'Educacion'</span><span class="p">,</span>
+    <span class="s1">'Income'</span><span class="p">:</span> <span class="s1">'Ingresos'</span>
+<span class="p">})[[</span>
+    <span class="s1">'Diabetes'</span><span class="p">,</span> <span class="s1">'PA_alta'</span><span class="p">,</span> <span class="s1">'col_alto'</span><span class="p">,</span> <span class="s1">'CheckCol'</span><span class="p">,</span>
+    <span class="s1">'IMC'</span><span class="p">,</span> <span class="s1">'Fumador'</span><span class="p">,</span> <span class="s1">'derrame'</span><span class="p">,</span> <span class="s1">'EnfCardi'</span><span class="p">,</span> <span class="s1">'ActFisi'</span><span class="p">,</span>
+    <span class="s1">'fruta'</span><span class="p">,</span> <span class="s1">'vegetales'</span><span class="p">,</span> <span class="s1">'Alcohlico'</span><span class="p">,</span> <span class="s1">'eps'</span><span class="p">,</span> <span class="s1">'AfordabilidadMedica'</span><span class="p">,</span>
+    <span class="s1">'SaludG'</span><span class="p">,</span> <span class="s1">'SaludM'</span><span class="p">,</span> <span class="s1">'SaludF'</span><span class="p">,</span> <span class="s1">'DificultadCaminar'</span><span class="p">,</span> <span class="s1">'Genero'</span><span class="p">,</span>
+    <span class="s1">'Edad'</span><span class="p">,</span> <span class="s1">'Educacion'</span><span class="p">,</span> <span class="s1">'Ingresos'</span>
+<span class="p">]]</span>
+
+<span class="n">n_original</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Registros originales:          </span><span class="si">{</span><span class="n">n_original</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Registros duplicados quitados: </span><span class="si">{</span><span class="n">n_original</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Registros únicos:              </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Registros originales:          70,692
+Registros duplicados quitados: 1,635
+Registros únicos:              69,057
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Diabetes</th>
+      <th>PA_alta</th>
+      <th>col_alto</th>
+      <th>CheckCol</th>
+      <th>IMC</th>
+      <th>Fumador</th>
+      <th>derrame</th>
+      <th>EnfCardi</th>
+      <th>ActFisi</th>
+      <th>fruta</th>
+      <th>...</th>
+      <th>eps</th>
+      <th>AfordabilidadMedica</th>
+      <th>SaludG</th>
+      <th>SaludM</th>
+      <th>SaludF</th>
+      <th>DificultadCaminar</th>
+      <th>Genero</th>
+      <th>Edad</th>
+      <th>Educacion</th>
+      <th>Ingresos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>26.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>5.0</td>
+      <td>30.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>6.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>26.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>12.0</td>
+      <td>6.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>26.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>10.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>13.0</td>
+      <td>6.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>28.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>11.0</td>
+      <td>6.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>29.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>8.0</td>
+      <td>5.0</td>
+      <td>8.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 22 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target</span> <span class="o">=</span> <span class="s1">'Diabetes'</span>
+<span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="n">target</span><span class="p">]</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">variables</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">target</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Variables predictoras: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Valores nulos: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">'Sin diabetes'</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">'Con diabetes / prediabetes'</span><span class="p">})</span>
+  <span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="s1">'Frecuencia'</span><span class="p">)</span>
+  <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">Porcentaje</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span> <span class="o">/</span> <span class="n">t</span><span class="p">[</span><span class="s1">'Frecuencia'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variables predictoras: 21
+Valores nulos: 0
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Frecuencia</th>
+      <th>Porcentaje</th>
+    </tr>
+    <tr>
+      <th>Diabetes</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Con diabetes / prediabetes</th>
+      <td>35097</td>
+      <td>50.8</td>
+    </tr>
+    <tr>
+      <th>Sin diabetes</th>
+      <td>33960</td>
+      <td>49.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>El conjunto original tiene 70 692 registros, de los cuales 1 635 son duplicados exactos. Al eliminarlos quedan <strong>69 057 registros únicos</strong> y 21 variables predictoras, sin valores nulos. La base original está perfectamente balanceada (35 346 personas con diabetes y 35 346 sin ella); después de quitar duplicados la proporción queda en 50.8% con diabetes o prediabetes y 49.2% sin ella, es decir, sigue prácticamente balanceada. Por eso no fue necesario aplicar técnicas de remuestreo ni pesos por clase, y la exactitud es una métrica interpretable.</p>
+</section>
+<section id="particion-en-entrenamiento-y-prueba">
+<h2>6. Partición en entrenamiento y prueba<a class="headerlink" href="#particion-en-entrenamiento-y-prueba" title="Link to this heading">#</a></h2>
+<p>Se reserva el 20% de los datos como conjunto de prueba. La partición es <strong>estratificada</strong>, lo que garantiza que la proporción de personas con y sin diabetes sea la misma en ambos conjuntos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span>
+
+<span class="n">particion</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">'Registros'</span><span class="p">:</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">)],</span>
+    <span class="s1">'</span><span class="si">% c</span><span class="s1">on diabetes'</span><span class="p">:</span> <span class="p">[</span><span class="n">y_train</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">],</span>
+<span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">'Entrenamiento'</span><span class="p">,</span> <span class="s1">'Prueba'</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">particion</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Registros</th>
+      <th>% con diabetes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Entrenamiento</th>
+      <td>55245</td>
+      <td>50.82</td>
+    </tr>
+    <tr>
+      <th>Prueba</th>
+      <td>13812</td>
+      <td>50.83</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>El conjunto de entrenamiento quedó con 55 245 registros y el de prueba con 13 812. Gracias a la estratificación, el porcentaje de personas con diabetes es prácticamente idéntico en ambos (50.82% y 50.83%), de modo que el conjunto de prueba representa fielmente a los datos de entrenamiento.</p>
+</section>
+<section id="definicion-de-los-modelos">
+<h2>7. Definición de los modelos<a class="headerlink" href="#definicion-de-los-modelos" title="Link to this heading">#</a></h2>
+<p>A continuación se definen los seis modelos con sus hiperparámetros. Los valores se eligieron para limitar el sobreajuste de los modelos más flexibles (profundidad máxima y número mínimo de observaciones por hoja en los árboles) y se mantuvieron fijos para todos los análisis.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Modelo</p></th>
+<th class="head"><p>Hiperparámetros</p></th>
+<th class="head"><p>Escalado</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>XGBoost</p></td>
+<td><p>400 árboles, tasa de aprendizaje 0.05, profundidad máx. 5, <code class="docutils literal notranslate"><span class="pre">subsample</span></code> 0.8, <code class="docutils literal notranslate"><span class="pre">colsample_bytree</span></code> 0.8, <code class="docutils literal notranslate"><span class="pre">min_child_weight</span></code> 5</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>Random Forest</p></td>
+<td><p>200 árboles, profundidad máx. 14, mínimo 10 observaciones por hoja</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-even"><td><p>Regresión Logística</p></td>
+<td><p>Regularización L2 por defecto (C = 1), máx. 2000 iteraciones</p></td>
+<td><p>Sí</p></td>
+</tr>
+<tr class="row-odd"><td><p>Árbol de Decisión</p></td>
+<td><p>Profundidad máx. 8, mínimo 50 observaciones por hoja</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-even"><td><p>KNN</p></td>
+<td><p>k = 35 vecinos, distancia euclidiana</p></td>
+<td><p>Sí</p></td>
+</tr>
+<tr class="row-odd"><td><p>Naive Bayes</p></td>
+<td><p>Gaussiano, sin hiperparámetros</p></td>
+<td><p>No</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modelos</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'XGBoost'</span><span class="p">:</span> <span class="n">XGBClassifier</span><span class="p">(</span>
+        <span class="n">n_estimators</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">subsample</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+        <span class="n">colsample_bytree</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">min_child_weight</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">eval_metric</span><span class="o">=</span><span class="s1">'logloss'</span><span class="p">,</span>
+        <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span>
+    <span class="s1">'Random Forest'</span><span class="p">:</span> <span class="n">RandomForestClassifier</span><span class="p">(</span>
+        <span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span>
+    <span class="s1">'Regresión Logística'</span><span class="p">:</span> <span class="n">Pipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s1">'scaler'</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s1">'clf'</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">2000</span><span class="p">))]),</span>
+    <span class="s1">'Árbol de Decisión'</span><span class="p">:</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span>
+        <span class="n">max_depth</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">),</span>
+    <span class="s1">'KNN'</span><span class="p">:</span> <span class="n">Pipeline</span><span class="p">([</span>
+        <span class="p">(</span><span class="s1">'scaler'</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+        <span class="p">(</span><span class="s1">'clf'</span><span class="p">,</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">35</span><span class="p">))]),</span>
+    <span class="s1">'Naive Bayes'</span><span class="p">:</span> <span class="n">GaussianNB</span><span class="p">(),</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="entrenamiento-y-evaluacion-en-el-conjunto-de-prueba">
+<h2>8. Entrenamiento y evaluación en el conjunto de prueba<a class="headerlink" href="#entrenamiento-y-evaluacion-en-el-conjunto-de-prueba" title="Link to this heading">#</a></h2>
+<p>Cada modelo se entrena con el conjunto de entrenamiento y se evalúa sobre el conjunto de prueba. Las métricas de clasificación se calculan con un umbral de 0.5 sobre la probabilidad estimada. Además, se estima el ROC-AUC con validación cruzada estratificada de 5 particiones sobre el conjunto de entrenamiento.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span>
+
+<span class="n">resultados</span><span class="p">,</span> <span class="n">prob_test</span><span class="p">,</span> <span class="n">prob_train</span><span class="p">,</span> <span class="n">auc_folds</span><span class="p">,</span> <span class="n">tiempos</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">{},</span> <span class="p">{},</span> <span class="p">{},</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">nombre</span><span class="p">,</span> <span class="n">modelo</span> <span class="ow">in</span> <span class="n">modelos</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">modelo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">tiempos</span><span class="p">[</span><span class="n">nombre</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+
+    <span class="n">p_te</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">p_tr</span> <span class="o">=</span> <span class="n">modelo</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_train</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="p">(</span><span class="n">p_te</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">prob_test</span><span class="p">[</span><span class="n">nombre</span><span class="p">],</span> <span class="n">prob_train</span><span class="p">[</span><span class="n">nombre</span><span class="p">]</span> <span class="o">=</span> <span class="n">p_te</span><span class="p">,</span> <span class="n">p_tr</span>
+
+    <span class="n">auc_folds</span><span class="p">[</span><span class="n">nombre</span><span class="p">]</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">modelo</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span>
+                                        <span class="n">scoring</span><span class="o">=</span><span class="s1">'roc_auc'</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s1">'Modelo'</span><span class="p">:</span> <span class="n">nombre</span><span class="p">,</span>
+        <span class="s1">'ROC-AUC'</span><span class="p">:</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">p_te</span><span class="p">),</span>
+        <span class="s1">'Exactitud'</span><span class="p">:</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+        <span class="s1">'Precisión'</span><span class="p">:</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+        <span class="s1">'Recall'</span><span class="p">:</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+        <span class="s1">'F1'</span><span class="p">:</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span>
+        <span class="s1">'AUC CV (media)'</span><span class="p">:</span> <span class="n">auc_folds</span><span class="p">[</span><span class="n">nombre</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+        <span class="s1">'AUC CV (ds)'</span><span class="p">:</span> <span class="n">auc_folds</span><span class="p">[</span><span class="n">nombre</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span>
+        <span class="s1">'AUC entrenamiento'</span><span class="p">:</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">p_tr</span><span class="p">),</span>
+        <span class="s1">'Tiempo de ajuste (s)'</span><span class="p">:</span> <span class="n">tiempos</span><span class="p">[</span><span class="n">nombre</span><span class="p">],</span>
+    <span class="p">})</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">nombre</span><span class="si">:</span><span class="s2">&lt;22</span><span class="si">}</span><span class="s2"> listo en </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2"> s"</span><span class="p">)</span>
+
+<span class="n">tabla_resultados</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados</span><span class="p">)</span>
+                    <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">'ROC-AUC'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                    <span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">mejor</span> <span class="o">=</span> <span class="n">tabla_resultados</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">'Modelo'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>XGBoost                listo en   7.2 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Random Forest          listo en  18.9 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Regresión Logística    listo en   0.5 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Árbol de Decisión      listo en   0.7 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>KNN                    listo en  13.2 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Naive Bayes            listo en   0.3 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">tabla_resultados</span><span class="p">[[</span><span class="s1">'Modelo'</span><span class="p">,</span> <span class="s1">'ROC-AUC'</span><span class="p">,</span> <span class="s1">'Exactitud'</span><span class="p">,</span> <span class="s1">'Precisión'</span><span class="p">,</span> <span class="s1">'Recall'</span><span class="p">,</span> <span class="s1">'F1'</span><span class="p">]]</span>
+ <span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">highlight_max</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">'ROC-AUC'</span><span class="p">,</span> <span class="s1">'Exactitud'</span><span class="p">,</span> <span class="s1">'Precisión'</span><span class="p">,</span> <span class="s1">'Recall'</span><span class="p">,</span> <span class="s1">'F1'</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#fde2c8'</span><span class="p">)</span>
+ <span class="o">.</span><span class="n">hide</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">'index'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_c046d_row0_col1, #T_c046d_row0_col2, #T_c046d_row0_col4, #T_c046d_row0_col5, #T_c046d_row2_col3 {
+  background-color: #fde2c8;
+}
+</style>
+<table id="T_c046d">
+  <thead>
+    <tr>
+      <th id="T_c046d_level0_col0" class="col_heading level0 col0" >Modelo</th>
+      <th id="T_c046d_level0_col1" class="col_heading level0 col1" >ROC-AUC</th>
+      <th id="T_c046d_level0_col2" class="col_heading level0 col2" >Exactitud</th>
+      <th id="T_c046d_level0_col3" class="col_heading level0 col3" >Precisión</th>
+      <th id="T_c046d_level0_col4" class="col_heading level0 col4" >Recall</th>
+      <th id="T_c046d_level0_col5" class="col_heading level0 col5" >F1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td id="T_c046d_row0_col0" class="data row0 col0" >XGBoost</td>
+      <td id="T_c046d_row0_col1" class="data row0 col1" >0.8235</td>
+      <td id="T_c046d_row0_col2" class="data row0 col2" >0.7493</td>
+      <td id="T_c046d_row0_col3" class="data row0 col3" >0.7315</td>
+      <td id="T_c046d_row0_col4" class="data row0 col4" >0.8004</td>
+      <td id="T_c046d_row0_col5" class="data row0 col5" >0.7644</td>
+    </tr>
+    <tr>
+      <td id="T_c046d_row1_col0" class="data row1 col0" >Random Forest</td>
+      <td id="T_c046d_row1_col1" class="data row1 col1" >0.8209</td>
+      <td id="T_c046d_row1_col2" class="data row1 col2" >0.7444</td>
+      <td id="T_c046d_row1_col3" class="data row1 col3" >0.7271</td>
+      <td id="T_c046d_row1_col4" class="data row1 col4" >0.7956</td>
+      <td id="T_c046d_row1_col5" class="data row1 col5" >0.7598</td>
+    </tr>
+    <tr>
+      <td id="T_c046d_row2_col0" class="data row2 col0" >Regresión Logística</td>
+      <td id="T_c046d_row2_col1" class="data row2 col1" >0.8174</td>
+      <td id="T_c046d_row2_col2" class="data row2 col2" >0.7450</td>
+      <td id="T_c046d_row2_col3" class="data row2 col3" >0.7380</td>
+      <td id="T_c046d_row2_col4" class="data row2 col4" >0.7726</td>
+      <td id="T_c046d_row2_col5" class="data row2 col5" >0.7549</td>
+    </tr>
+    <tr>
+      <td id="T_c046d_row3_col0" class="data row3 col0" >Árbol de Decisión</td>
+      <td id="T_c046d_row3_col1" class="data row3 col1" >0.8105</td>
+      <td id="T_c046d_row3_col2" class="data row3 col2" >0.7331</td>
+      <td id="T_c046d_row3_col3" class="data row3 col3" >0.7143</td>
+      <td id="T_c046d_row3_col4" class="data row3 col4" >0.7912</td>
+      <td id="T_c046d_row3_col5" class="data row3 col5" >0.7508</td>
+    </tr>
+    <tr>
+      <td id="T_c046d_row4_col0" class="data row4 col0" >KNN</td>
+      <td id="T_c046d_row4_col1" class="data row4 col1" >0.8053</td>
+      <td id="T_c046d_row4_col2" class="data row4 col2" >0.7360</td>
+      <td id="T_c046d_row4_col3" class="data row4 col3" >0.7186</td>
+      <td id="T_c046d_row4_col4" class="data row4 col4" >0.7900</td>
+      <td id="T_c046d_row4_col5" class="data row4 col5" >0.7526</td>
+    </tr>
+    <tr>
+      <td id="T_c046d_row5_col0" class="data row5 col0" >Naive Bayes</td>
+      <td id="T_c046d_row5_col1" class="data row5 col1" >0.7800</td>
+      <td id="T_c046d_row5_col2" class="data row5 col2" >0.7186</td>
+      <td id="T_c046d_row5_col3" class="data row5 col3" >0.7254</td>
+      <td id="T_c046d_row5_col4" class="data row5 col4" >0.7181</td>
+      <td id="T_c046d_row5_col5" class="data row5 col5" >0.7217</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p><strong>XGBoost</strong> obtiene el mejor desempeño en casi todas las métricas: ROC-AUC de 0.8235, exactitud de 74.9%, recall de 80.0% y F1 de 0.764. Le siguen muy de cerca Random Forest (AUC 0.8209) y la Regresión Logística (AUC 0.8174), que además tiene la precisión más alta (73.8%). Naive Bayes es el modelo más débil (AUC 0.780), lo que es esperable porque su supuesto de independencia entre variables no se cumple: varias de ellas están relacionadas entre sí, como la salud general, la salud física y la dificultad para caminar.</p>
+<p>La diferencia de AUC entre el primer y el tercer modelo es de apenas 0.006, lo que indica que el límite del desempeño lo pone la información disponible en la encuesta más que el algoritmo elegido.</p>
+<p><strong>Gráfico comparativo de métricas</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metricas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Exactitud'</span><span class="p">,</span> <span class="s1">'Precisión'</span><span class="p">,</span> <span class="s1">'Recall'</span><span class="p">,</span> <span class="s1">'F1'</span><span class="p">,</span> <span class="s1">'ROC-AUC'</span><span class="p">]</span>
+<span class="n">largo</span> <span class="o">=</span> <span class="n">tabla_resultados</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">id_vars</span><span class="o">=</span><span class="s1">'Modelo'</span><span class="p">,</span> <span class="n">value_vars</span><span class="o">=</span><span class="n">metricas</span><span class="p">,</span>
+                              <span class="n">var_name</span><span class="o">=</span><span class="s1">'Métrica'</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">'Valor'</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">largo</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">'Modelo'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'Valor'</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">'Métrica'</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+            <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">'#8C8C8C'</span><span class="p">,</span> <span class="s1">'#DD8452'</span><span class="p">,</span> <span class="s1">'#C44E52'</span><span class="p">,</span> <span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="s1">'#55A868'</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'Métricas en el conjunto de prueba (umbral 0.5)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Valor'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">'upper right'</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/145fc0f2c9a6b26d95f73115a637de603e373b20f22b02b27d33e5b3780009d9.png" src="../_images/145fc0f2c9a6b26d95f73115a637de603e373b20f22b02b27d33e5b3780009d9.png" />
+</div>
+</div>
+<p>En el gráfico se aprecia que en los cinco primeros modelos el recall (rojo) es claramente mayor que la precisión (naranja): con umbral 0.5 los modelos tienden a marcar como positivas a más personas de las que realmente tienen diabetes. Para un modelo de tamizaje esto es deseable, porque prioriza no dejar casos sin detectar. Naive Bayes es la excepción: sus cinco métricas están en un nivel similar y más bajo.</p>
+</section>
+<section id="validacion-cruzada">
+<h2>9. Validación cruzada<a class="headerlink" href="#validacion-cruzada" title="Link to this heading">#</a></h2>
+<p>La validación cruzada permite verificar que el resultado de la partición de prueba no se deba al azar. Para cada modelo se muestran los cinco valores de ROC-AUC obtenidos en las particiones de validación.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">folds</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">auc_folds</span><span class="p">)</span>
+         <span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">var_name</span><span class="o">=</span><span class="s1">'Modelo'</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s1">'ROC-AUC'</span><span class="p">))</span>
+<span class="n">orden</span> <span class="o">=</span> <span class="n">tabla_resultados</span><span class="p">[</span><span class="s1">'Modelo'</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">folds</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">'Modelo'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'ROC-AUC'</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">orden</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+            <span class="n">palette</span><span class="o">=</span><span class="n">COLORES_MODELOS</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">fliersize</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">folds</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">'Modelo'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'ROC-AUC'</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">orden</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+              <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">jitter</span><span class="o">=</span><span class="mf">0.08</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'ROC-AUC en las 5 particiones de validación cruzada'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">tabla_resultados</span><span class="p">[[</span><span class="s1">'Modelo'</span><span class="p">,</span> <span class="s1">'AUC CV (media)'</span><span class="p">,</span> <span class="s1">'AUC CV (ds)'</span><span class="p">,</span> <span class="s1">'ROC-AUC'</span><span class="p">]]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e89e29c331e1d015cbb612ae6466eec46bada6841d58d890189b96234ef8ccd5.png" src="../_images/e89e29c331e1d015cbb612ae6466eec46bada6841d58d890189b96234ef8ccd5.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>AUC CV (media)</th>
+      <th>AUC CV (ds)</th>
+      <th>ROC-AUC</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>XGBoost</td>
+      <td>0.8256</td>
+      <td>0.0044</td>
+      <td>0.8235</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Random Forest</td>
+      <td>0.8235</td>
+      <td>0.0037</td>
+      <td>0.8209</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Regresión Logística</td>
+      <td>0.8200</td>
+      <td>0.0036</td>
+      <td>0.8174</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Árbol de Decisión</td>
+      <td>0.8104</td>
+      <td>0.0047</td>
+      <td>0.8105</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>KNN</td>
+      <td>0.8053</td>
+      <td>0.0050</td>
+      <td>0.8053</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Naive Bayes</td>
+      <td>0.7814</td>
+      <td>0.0043</td>
+      <td>0.7800</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Los resultados de la validación cruzada son muy estables: la desviación estándar del ROC-AUC entre particiones está entre 0.0036 y 0.0050 para todos los modelos. Además, el AUC medio de validación cruzada es casi igual al AUC en el conjunto de prueba (por ejemplo, 0.8256 frente a 0.8235 en XGBoost), lo que confirma que el resultado de la partición de prueba no se debe al azar. El orden de los modelos se mantiene igual en ambas evaluaciones, aunque las cajas de XGBoost, Random Forest y Regresión Logística se solapan parcialmente, lo que refuerza que su diferencia es pequeña.</p>
+</section>
+<section id="curvas-roc">
+<h2>10. Curvas ROC<a class="headerlink" href="#curvas-roc" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">7.5</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">nombre</span> <span class="ow">in</span> <span class="n">orden</span><span class="p">:</span>
+    <span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">prob_test</span><span class="p">[</span><span class="n">nombre</span><span class="p">])</span>
+    <span class="n">auc</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">prob_test</span><span class="p">[</span><span class="n">nombre</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLORES_MODELOS</span><span class="p">[</span><span class="n">nombre</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span> <span class="k">if</span> <span class="n">nombre</span> <span class="o">==</span> <span class="n">mejor</span> <span class="k">else</span> <span class="mf">1.4</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">nombre</span><span class="si">}</span><span class="s1"> (AUC = </span><span class="si">{</span><span class="n">auc</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">)'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s1">'--'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'grey'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Clasificador aleatorio'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Tasa de falsos positivos (1 − especificidad)'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Tasa de verdaderos positivos (sensibilidad)'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'Curvas ROC en el conjunto de prueba'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'lower right'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4658a4a8aecc3741363cd2ac87939bf87d706132181b24451a5cf1a3916ee9e3.png" src="../_images/4658a4a8aecc3741363cd2ac87939bf87d706132181b24451a5cf1a3916ee9e3.png" />
+</div>
+</div>
+<p>Las curvas ROC de XGBoost, Random Forest y Regresión Logística prácticamente se superponen, y las del Árbol de Decisión y KNN quedan apenas por debajo. Todas están muy por encima de la diagonal del clasificador aleatorio (AUC = 0.5). Naive Bayes es la única curva que se separa visiblemente, sobre todo en la zona de tasas de falsos positivos entre 0.1 y 0.5. Un AUC de 0.82 significa que, si se elige al azar una persona con diabetes y otra sin ella, el mejor modelo le asigna mayor probabilidad a la persona con diabetes en el 82% de los casos.</p>
+</section>
+<section id="matrices-de-confusion">
+<h2>11. Matrices de confusión<a class="headerlink" href="#matrices-de-confusion" title="Link to this heading">#</a></h2>
+<p>Cada matriz muestra, para el conjunto de prueba y con umbral 0.5, el número de personas y el porcentaje sobre el total de su clase real (por fila).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">nombre</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">orden</span><span class="p">):</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="p">(</span><span class="n">prob_test</span><span class="p">[</span><span class="n">nombre</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">cm_pct</span> <span class="o">=</span> <span class="n">cm</span> <span class="o">/</span> <span class="n">cm</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="n">anot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">cm</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">cm_pct</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%'</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)])</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm_pct</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="n">anot</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">'Blues'</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">annot_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">'fontsize'</span><span class="p">:</span> <span class="mi">11</span><span class="p">},</span>
+                <span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="s1">'Sin diabetes'</span><span class="p">,</span> <span class="s1">'Con diabetes'</span><span class="p">],</span>
+                <span class="n">yticklabels</span><span class="o">=</span><span class="p">[</span><span class="s1">'Sin diabetes'</span><span class="p">,</span> <span class="s1">'Con diabetes'</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">nombre</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Predicción'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Valor real'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">'Matrices de confusión (umbral 0.5)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2cf5ecd0b382ee1a8c382462a165ac1e9109df5ee966c31df49c4008a2a2b9bb.png" src="../_images/2cf5ecd0b382ee1a8c382462a165ac1e9109df5ee966c31df49c4008a2a2b9bb.png" />
+</div>
+</div>
+<p>En XGBoost, de las 7 020 personas con diabetes del conjunto de prueba el modelo detecta correctamente 5 619 (80.0%) y deja sin detectar 1 401 (20.0%). De las 6 792 personas sin diabetes, clasifica correctamente 4 730 (69.6%) y genera 2 062 falsas alarmas (30.4%). El patrón se repite en los demás modelos: todos aciertan más en la clase con diabetes que en la clase sin diabetes. Naive Bayes es el que menos casos positivos detecta (71.8%), mientras que la Regresión Logística es la más equilibrada entre ambas clases (77.3% y 71.6%).</p>
+</section>
+<section id="analisis-de-sobreajuste">
+<h2>12. Análisis de sobreajuste<a class="headerlink" href="#analisis-de-sobreajuste" title="Link to this heading">#</a></h2>
+<p>Se compara el ROC-AUC obtenido sobre los mismos datos de entrenamiento con el de validación cruzada y el de prueba. Una brecha grande entre entrenamiento y prueba indica que el modelo memorizó patrones que no generalizan.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sobreajuste</span> <span class="o">=</span> <span class="n">tabla_resultados</span><span class="p">[[</span><span class="s1">'Modelo'</span><span class="p">,</span> <span class="s1">'AUC entrenamiento'</span><span class="p">,</span> <span class="s1">'AUC CV (media)'</span><span class="p">,</span> <span class="s1">'ROC-AUC'</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">sobreajuste</span><span class="p">[</span><span class="s1">'Brecha entrenamiento − prueba'</span><span class="p">]</span> <span class="o">=</span> <span class="n">sobreajuste</span><span class="p">[</span><span class="s1">'AUC entrenamiento'</span><span class="p">]</span> <span class="o">-</span> <span class="n">sobreajuste</span><span class="p">[</span><span class="s1">'ROC-AUC'</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sobreajuste</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sobreajuste</span><span class="p">[</span><span class="s1">'AUC entrenamiento'</span><span class="p">],</span> <span class="s1">'o-'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#8C8C8C'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Entrenamiento'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sobreajuste</span><span class="p">[</span><span class="s1">'AUC CV (media)'</span><span class="p">],</span> <span class="s1">'s-'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#DD8452'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Validación cruzada'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sobreajuste</span><span class="p">[</span><span class="s1">'ROC-AUC'</span><span class="p">],</span> <span class="s1">'D-'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#C44E52'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Prueba'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">sobreajuste</span><span class="p">[</span><span class="s1">'Modelo'</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'ROC-AUC'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'ROC-AUC en entrenamiento, validación cruzada y prueba'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">sobreajuste</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/18bd4f424067281a926d68d040f024bb74e24df3014174b67af8331f588593e6.png" src="../_images/18bd4f424067281a926d68d040f024bb74e24df3014174b67af8331f588593e6.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>AUC entrenamiento</th>
+      <th>AUC CV (media)</th>
+      <th>ROC-AUC</th>
+      <th>Brecha entrenamiento − prueba</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>XGBoost</td>
+      <td>0.8474</td>
+      <td>0.8256</td>
+      <td>0.8235</td>
+      <td>0.0239</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Random Forest</td>
+      <td>0.8637</td>
+      <td>0.8235</td>
+      <td>0.8209</td>
+      <td>0.0428</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Regresión Logística</td>
+      <td>0.8203</td>
+      <td>0.8200</td>
+      <td>0.8174</td>
+      <td>0.0029</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Árbol de Decisión</td>
+      <td>0.8238</td>
+      <td>0.8104</td>
+      <td>0.8105</td>
+      <td>0.0133</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>KNN</td>
+      <td>0.8285</td>
+      <td>0.8053</td>
+      <td>0.8053</td>
+      <td>0.0232</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Naive Bayes</td>
+      <td>0.7815</td>
+      <td>0.7814</td>
+      <td>0.7800</td>
+      <td>0.0015</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Random Forest</strong> presenta la mayor brecha entre entrenamiento y prueba (+0.043): a pesar de limitar la profundidad a 14, sus árboles alcanzan a memorizar parte de los datos de entrenamiento. XGBoost (+0.024) y KNN (+0.023) muestran un sobreajuste moderado, y el Árbol de Decisión uno leve (+0.013). La Regresión Logística (+0.003) y Naive Bayes (+0.002) prácticamente no se sobreajustan, lo que es coherente con su menor flexibilidad.</p>
+<p>En ningún caso el sobreajuste es grave: las líneas de validación cruzada y de prueba coinciden en todos los modelos, lo que indica que el desempeño reportado es el que se puede esperar con datos nuevos.</p>
+</section>
+<section id="efecto-del-umbral-de-decision">
+<h2>13. Efecto del umbral de decisión<a class="headerlink" href="#efecto-del-umbral-de-decision" title="Link to this heading">#</a></h2>
+<p>Las métricas de la sección 8 usan un umbral de 0.5, pero ese valor no es obligatorio. Bajar el umbral hace que el modelo marque a más personas como positivas: aumenta el recall a costa de la precisión. En tamizaje puede convenir un umbral menor para no dejar casos sin detectar. A continuación se muestra este equilibrio para el mejor modelo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prec</span><span class="p">,</span> <span class="n">rec</span><span class="p">,</span> <span class="n">umbrales</span> <span class="o">=</span> <span class="n">precision_recall_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">prob_test</span><span class="p">[</span><span class="n">mejor</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">umbrales</span><span class="p">,</span> <span class="n">prec</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#DD8452'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Precisión'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">umbrales</span><span class="p">,</span> <span class="n">rec</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#C44E52'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Recall (sensibilidad)'</span><span class="p">)</span>
+<span class="n">f1_curva</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">prec</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">rec</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">prec</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">rec</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">umbrales</span><span class="p">,</span> <span class="n">f1_curva</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#4C72B0'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">'--'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'F1'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'grey'</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">':'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.505</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="s1">'umbral 0.5'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'grey'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Umbral de decisión'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Valor'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Precisión, recall y F1 según el umbral (</span><span class="si">{</span><span class="n">mejor</span><span class="si">}</span><span class="s1">)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'lower left'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">filas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]:</span>
+    <span class="n">y_u</span> <span class="o">=</span> <span class="p">(</span><span class="n">prob_test</span><span class="p">[</span><span class="n">mejor</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">u</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">vn</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">vp</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_u</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    <span class="n">filas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">'Umbral'</span><span class="p">:</span> <span class="n">u</span><span class="p">,</span>
+                  <span class="s1">'Precisión'</span><span class="p">:</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_u</span><span class="p">),</span>
+                  <span class="s1">'Recall'</span><span class="p">:</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_u</span><span class="p">),</span>
+                  <span class="s1">'Especificidad'</span><span class="p">:</span> <span class="n">vn</span> <span class="o">/</span> <span class="p">(</span><span class="n">vn</span> <span class="o">+</span> <span class="n">fp</span><span class="p">),</span>
+                  <span class="s1">'F1'</span><span class="p">:</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_u</span><span class="p">),</span>
+                  <span class="s1">'Casos no detectados (FN)'</span><span class="p">:</span> <span class="n">fn</span><span class="p">,</span>
+                  <span class="s1">'Falsas alarmas (FP)'</span><span class="p">:</span> <span class="n">fp</span><span class="p">})</span>
+<span class="n">tabla_umbral</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">filas</span><span class="p">)</span>
+<span class="n">tabla_umbral</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/927a2b4ba4f33bd4254e23a4426d650109748070212b457adfd90d88e040ea9c.png" src="../_images/927a2b4ba4f33bd4254e23a4426d650109748070212b457adfd90d88e040ea9c.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Umbral</th>
+      <th>Precisión</th>
+      <th>Recall</th>
+      <th>Especificidad</th>
+      <th>F1</th>
+      <th>Casos no detectados (FN)</th>
+      <th>Falsas alarmas (FP)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.3</td>
+      <td>0.6651</td>
+      <td>0.9249</td>
+      <td>0.5187</td>
+      <td>0.7738</td>
+      <td>527</td>
+      <td>3269</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.4</td>
+      <td>0.6972</td>
+      <td>0.8752</td>
+      <td>0.6072</td>
+      <td>0.7761</td>
+      <td>876</td>
+      <td>2668</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.5</td>
+      <td>0.7315</td>
+      <td>0.8004</td>
+      <td>0.6964</td>
+      <td>0.7644</td>
+      <td>1401</td>
+      <td>2062</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.6</td>
+      <td>0.7637</td>
+      <td>0.6949</td>
+      <td>0.7778</td>
+      <td>0.7277</td>
+      <td>2142</td>
+      <td>1509</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.7</td>
+      <td>0.8051</td>
+      <td>0.5456</td>
+      <td>0.8635</td>
+      <td>0.6504</td>
+      <td>3190</td>
+      <td>927</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>El gráfico muestra el equilibrio entre precisión y recall en XGBoost. Con el umbral por defecto de 0.5 el modelo detecta el 80.0% de los casos con una precisión de 73.2%. Si se baja el umbral a 0.4, el recall sube a 87.5% y los casos no detectados bajan de 1 401 a 876, a cambio de 606 falsas alarmas adicionales; el F1 incluso mejora ligeramente (0.776 frente a 0.764). Con 0.3 el recall llega a 92.5%, pero la especificidad cae a 51.9%. En sentido contrario, un umbral de 0.7 eleva la precisión a 80.5% pero deja sin detectar a casi la mitad de los casos (recall de 54.6%).</p>
+<p>Para tamizaje, un umbral entre 0.4 y 0.5 ofrece un buen compromiso. La elección final depende del costo de cada tipo de error en el contexto donde se use el modelo.</p>
+</section>
+<section id="calibracion-y-ajuste-a-la-prevalencia-real">
+<h2>14. Calibración y ajuste a la prevalencia real<a class="headerlink" href="#calibracion-y-ajuste-a-la-prevalencia-real" title="Link to this heading">#</a></h2>
+<p>Un modelo está <strong>calibrado</strong> si, entre las personas a las que asigna una probabilidad de 70%, aproximadamente el 70% tiene realmente la condición. La curva de calibración agrupa las predicciones en intervalos y compara la probabilidad media predicha con la proporción observada de positivos; un modelo perfectamente calibrado sigue la diagonal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">7.5</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">nombre</span> <span class="ow">in</span> <span class="n">orden</span><span class="p">:</span>
+    <span class="n">frac_pos</span><span class="p">,</span> <span class="n">prob_media</span> <span class="o">=</span> <span class="n">calibration_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">prob_test</span><span class="p">[</span><span class="n">nombre</span><span class="p">],</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="s1">'quantile'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">prob_media</span><span class="p">,</span> <span class="n">frac_pos</span><span class="p">,</span> <span class="s1">'o-'</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">COLORES_MODELOS</span><span class="p">[</span><span class="n">nombre</span><span class="p">],</span>
+            <span class="n">lw</span><span class="o">=</span><span class="mi">2</span> <span class="k">if</span> <span class="n">nombre</span> <span class="o">==</span> <span class="n">mejor</span> <span class="k">else</span> <span class="mf">1.2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">nombre</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s1">'--'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'grey'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Calibración perfecta'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Probabilidad media predicha'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Proporción observada con diabetes'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'Curvas de calibración (conjunto de prueba)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/aed1c5d50c1ca1a5b2a6f8b692ab655537ee3508c6f647f5c8c26a7730d60a22.png" src="../_images/aed1c5d50c1ca1a5b2a6f8b692ab655537ee3508c6f647f5c8c26a7730d60a22.png" />
+</div>
+</div>
+<p>Los modelos basados en árboles, la Regresión Logística y KNN están bien calibrados: sus curvas siguen de cerca la diagonal en todo el rango, lo que significa que sus probabilidades pueden interpretarse directamente como riesgo (dentro de la muestra 50/50). <strong>Naive Bayes</strong> es la excepción: está mal calibrado y es demasiado extremo. Asigna probabilidades cercanas a 0 a grupos en los que en realidad entre el 12% y el 26% tiene diabetes, y probabilidades cercanas a 1 a grupos en los que la proporción real está entre el 70% y el 80%. Esto es consecuencia directa del supuesto de independencia: al multiplicar la evidencia de variables relacionadas entre sí, el modelo la cuenta varias veces y exagera su confianza.</p>
+<p><strong>Ajuste a la prevalencia de la población</strong></p>
+<p>Como el modelo se entrenó con una muestra 50/50, sus probabilidades están calibradas para una población donde la mitad de las personas tiene diabetes o prediabetes. Para usarlo en la población general, donde la prevalencia es cercana al 13.9%, se aplica la corrección de odds descrita en el marco teórico. El tablero GlucoRisk muestra ambas probabilidades en la página de predicción.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PREVALENCIA</span> <span class="o">=</span> <span class="mf">0.139</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ajustar_prevalencia</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">pi</span><span class="o">=</span><span class="n">PREVALENCIA</span><span class="p">,</span> <span class="n">pi_entrenamiento</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="n">odds</span> <span class="o">=</span> <span class="n">p</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">pi</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">pi</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">pi_entrenamiento</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">pi_entrenamiento</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">odds</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">odds</span><span class="p">)</span>
+
+<span class="n">p_modelo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.90</span><span class="p">])</span>
+<span class="n">tabla_ajuste</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">'Probabilidad del modelo (muestra 50/50)'</span><span class="p">:</span> <span class="n">p_modelo</span><span class="p">,</span>
+    <span class="s1">'Probabilidad ajustada (prevalencia 13.9%)'</span><span class="p">:</span> <span class="n">ajustar_prevalencia</span><span class="p">(</span><span class="n">p_modelo</span><span class="p">),</span>
+<span class="p">})</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">p_aj</span> <span class="o">=</span> <span class="n">ajustar_prevalencia</span><span class="p">(</span><span class="n">prob_test</span><span class="p">[</span><span class="n">mejor</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ROC-AUC con probabilidades originales: </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">prob_test</span><span class="p">[</span><span class="n">mejor</span><span class="p">])</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ROC-AUC con probabilidades ajustadas:  </span><span class="si">{</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span><span class="w"> </span><span class="n">p_aj</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">tabla_ajuste</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROC-AUC con probabilidades originales: 0.8235
+ROC-AUC con probabilidades ajustadas:  0.8235
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Probabilidad del modelo (muestra 50/50)</th>
+      <th>Probabilidad ajustada (prevalencia 13.9%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.10</td>
+      <td>0.018</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.25</td>
+      <td>0.051</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.50</td>
+      <td>0.139</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.75</td>
+      <td>0.326</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.90</td>
+      <td>0.592</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>La tabla muestra cuánto cambia la probabilidad al trasladarla a la población general. Una persona a la que el modelo le asigna 50% de probabilidad en la muestra balanceada tendría en realidad un riesgo de 13.9%, que es justamente la prevalencia de la población; una probabilidad de 90% equivale a 59.2%. Como se esperaba, el ROC-AUC es el mismo con ambas probabilidades (0.8235), porque la corrección no altera el orden de las personas: solo cambia la escala en la que se expresa el riesgo.</p>
+</section>
+<section id="interpretacion-de-los-modelos">
+<h2>15. Interpretación de los modelos<a class="headerlink" href="#interpretacion-de-los-modelos" title="Link to this heading">#</a></h2>
+<section id="importancia-por-permutacion-del-mejor-modelo">
+<h3>Importancia por permutación del mejor modelo<a class="headerlink" href="#importancia-por-permutacion-del-mejor-modelo" title="Link to this heading">#</a></h3>
+<p>Se mide cuánto cae el ROC-AUC del mejor modelo cuando se desordena cada variable. Para reducir el tiempo de cálculo se usa una muestra de 5 000 registros del conjunto de prueba y 5 repeticiones por variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">muestra</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span>
+<span class="n">perm</span> <span class="o">=</span> <span class="n">permutation_importance</span><span class="p">(</span><span class="n">modelos</span><span class="p">[</span><span class="n">mejor</span><span class="p">],</span> <span class="n">muestra</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">muestra</span><span class="o">.</span><span class="n">index</span><span class="p">],</span>
+                              <span class="n">scoring</span><span class="o">=</span><span class="s1">'roc_auc'</span><span class="p">,</span> <span class="n">n_repeats</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">importancia</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'Variable'</span><span class="p">:</span> <span class="n">variables</span><span class="p">,</span>
+                             <span class="s1">'Caída del AUC'</span><span class="p">:</span> <span class="n">perm</span><span class="o">.</span><span class="n">importances_mean</span><span class="p">,</span>
+                             <span class="s1">'ds'</span><span class="p">:</span> <span class="n">perm</span><span class="o">.</span><span class="n">importances_std</span><span class="p">})</span>
+               <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">'Caída del AUC'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+               <span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+<span class="n">top</span> <span class="o">=</span> <span class="n">importancia</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">top</span><span class="p">[</span><span class="s1">'Variable'</span><span class="p">],</span> <span class="n">top</span><span class="p">[</span><span class="s1">'Caída del AUC'</span><span class="p">],</span> <span class="n">xerr</span><span class="o">=</span><span class="n">top</span><span class="p">[</span><span class="s1">'ds'</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">'#C44E52'</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Caída del ROC-AUC al permutar la variable'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Importancia por permutación (</span><span class="si">{</span><span class="n">mejor</span><span class="si">}</span><span class="s1">)'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">importancia</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e699f8a5730146afa06f8b8627741ce6183fc7f28fcf3eacd0cdcea658c6612a.png" src="../_images/e699f8a5730146afa06f8b8627741ce6183fc7f28fcf3eacd0cdcea658c6612a.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>Caída del AUC</th>
+      <th>ds</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SaludG</td>
+      <td>0.0473</td>
+      <td>0.0015</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>IMC</td>
+      <td>0.0374</td>
+      <td>0.0039</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Edad</td>
+      <td>0.0280</td>
+      <td>0.0016</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>PA_alta</td>
+      <td>0.0160</td>
+      <td>0.0017</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>col_alto</td>
+      <td>0.0127</td>
+      <td>0.0011</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CheckCol</td>
+      <td>0.0039</td>
+      <td>0.0007</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Alcohlico</td>
+      <td>0.0032</td>
+      <td>0.0005</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Genero</td>
+      <td>0.0031</td>
+      <td>0.0005</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>EnfCardi</td>
+      <td>0.0027</td>
+      <td>0.0005</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Ingresos</td>
+      <td>0.0017</td>
+      <td>0.0006</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Las tres variables más importantes para XGBoost son la <strong>salud general percibida</strong> (<code class="docutils literal notranslate"><span class="pre">SaludG</span></code>, caída del AUC de 0.047), el <strong>índice de masa corporal</strong> (<code class="docutils literal notranslate"><span class="pre">IMC</span></code>, 0.037) y la <strong>edad</strong> (<code class="docutils literal notranslate"><span class="pre">Edad</span></code>, 0.028). Les siguen la presión arterial alta (<code class="docutils literal notranslate"><span class="pre">PA_alta</span></code>, 0.016) y el colesterol alto (<code class="docutils literal notranslate"><span class="pre">col_alto</span></code>, 0.013). A partir de la sexta variable la importancia cae por debajo de 0.004, lo que indica que el modelo se apoya sobre todo en estas cinco. Este resultado coincide con el análisis bivariado, donde estas mismas variables mostraron las asociaciones más fuertes con la diabetes.</p>
+</section>
+<section id="odds-ratios-de-la-regresion-logistica">
+<h3>Odds ratios de la Regresión Logística<a class="headerlink" href="#odds-ratios-de-la-regresion-logistica" title="Link to this heading">#</a></h3>
+<p>Como la Regresión Logística se entrenó con variables estandarizadas, cada odds ratio representa cuánto se multiplican los odds de tener diabetes cuando la variable aumenta una desviación estándar, manteniendo las demás constantes. Valores mayores que 1 indican mayor riesgo y valores menores que 1, menor riesgo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg_log</span> <span class="o">=</span> <span class="n">modelos</span><span class="p">[</span><span class="s1">'Regresión Logística'</span><span class="p">]</span>
+<span class="n">coef</span> <span class="o">=</span> <span class="n">reg_log</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s1">'clf'</span><span class="p">]</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">odds</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'Variable'</span><span class="p">:</span> <span class="n">variables</span><span class="p">,</span> <span class="s1">'Coeficiente'</span><span class="p">:</span> <span class="n">coef</span><span class="p">,</span> <span class="s1">'Odds ratio'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">coef</span><span class="p">)})</span>
+        <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">abs_coef</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="p">[</span><span class="s1">'Coeficiente'</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">())</span>
+        <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">'abs_coef'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">'abs_coef'</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+<span class="n">graf</span> <span class="o">=</span> <span class="n">odds</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">colores</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'#C44E52'</span> <span class="k">if</span> <span class="n">o</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">'#4C72B0'</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">graf</span><span class="p">[</span><span class="s1">'Odds ratio'</span><span class="p">]]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">graf</span><span class="p">[</span><span class="s1">'Variable'</span><span class="p">],</span> <span class="n">graf</span><span class="p">[</span><span class="s1">'Odds ratio'</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colores</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Odds ratio por aumento de 1 desviación estándar'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'Odds ratios de la Regresión Logística'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">odds</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b9d8286125df6ba23088b39384043fc82e250be41bcdf3fb610401fdcdb06641.png" src="../_images/b9d8286125df6ba23088b39384043fc82e250be41bcdf3fb610401fdcdb06641.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Variable</th>
+      <th>Coeficiente</th>
+      <th>Odds ratio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SaludG</td>
+      <td>0.632</td>
+      <td>1.882</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>IMC</td>
+      <td>0.533</td>
+      <td>1.705</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Edad</td>
+      <td>0.428</td>
+      <td>1.534</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>PA_alta</td>
+      <td>0.356</td>
+      <td>1.427</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>col_alto</td>
+      <td>0.291</td>
+      <td>1.337</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CheckCol</td>
+      <td>0.220</td>
+      <td>1.245</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Alcohlico</td>
+      <td>-0.151</td>
+      <td>0.859</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Genero</td>
+      <td>0.129</td>
+      <td>1.138</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Ingresos</td>
+      <td>-0.119</td>
+      <td>0.888</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>EnfCardi</td>
+      <td>0.095</td>
+      <td>1.100</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>SaludF</td>
+      <td>-0.081</td>
+      <td>0.922</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>DificultadCaminar</td>
+      <td>0.056</td>
+      <td>1.057</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>La Regresión Logística confirma el mismo grupo de variables. Un aumento de una desviación estándar en la salud general percibida (que en esta escala significa <em>peor</em> salud) multiplica los odds de tener diabetes por 1.88; en el IMC, por 1.71; y en la edad, por 1.53. Tener presión arterial alta (1.43) y colesterol alto (1.34) también aumenta el riesgo. En sentido contrario, el consumo alto de alcohol (0.86) y los mayores ingresos (0.89) se asocian con menores odds.</p>
+<p>El efecto protector del alcohol no debe interpretarse como causal: probablemente refleja que las personas con diabetes diagnosticada reducen su consumo por indicación médica, o que el consumo alto se concentra en grupos con otras características. El signo negativo de <code class="docutils literal notranslate"><span class="pre">SaludF</span></code> aparece porque la salud física está muy relacionada con <code class="docutils literal notranslate"><span class="pre">SaludG</span></code> y con <code class="docutils literal notranslate"><span class="pre">DificultadCaminar</span></code>, que ya recogen ese efecto en el modelo.</p>
+</section>
+<section id="primeras-reglas-del-arbol-de-decision">
+<h3>Primeras reglas del Árbol de Decisión<a class="headerlink" href="#primeras-reglas-del-arbol-de-decision" title="Link to this heading">#</a></h3>
+<p>Para ilustrar cómo razona un árbol, se muestran los tres primeros niveles del Árbol de Decisión entrenado. Cada nodo indica la regla de división, el índice de Gini, el número de observaciones y la clase mayoritaria.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plot_tree</span><span class="p">(</span><span class="n">modelos</span><span class="p">[</span><span class="s1">'Árbol de Decisión'</span><span class="p">],</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">variables</span><span class="p">,</span>
+          <span class="n">class_names</span><span class="o">=</span><span class="p">[</span><span class="s1">'Sin diabetes'</span><span class="p">,</span> <span class="s1">'Con diabetes'</span><span class="p">],</span> <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rounded</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+          <span class="n">impurity</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">proportion</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'Árbol de Decisión: primeros tres niveles'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">'bold'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4119a829e920e620106b1e723b74a8b1960169f25fb2995e0e87f10307d120b8.png" src="../_images/4119a829e920e620106b1e723b74a8b1960169f25fb2995e0e87f10307d120b8.png" />
+</div>
+</div>
+<p>La primera división del árbol se hace por <strong>presión arterial alta</strong>. Entre las personas sin hipertensión (43% de la muestra de entrenamiento), solo el 29.4% tiene diabetes; entre las hipertensas (57%), la proporción sube a 67.0%. En ambos lados, la segunda división es la <strong>salud general percibida</strong>: quienes la califican como excelente o muy buena (<code class="docutils literal notranslate"><span class="pre">SaludG</span></code> ≤ 2) tienen un riesgo mucho menor. El grupo de mayor riesgo en el tercer nivel es el de personas hipertensas con salud general regular o mala, que representan el 41.7% de la muestra y en el que el 74.4% tiene diabetes. Las divisiones siguientes usan la edad y el IMC. Las reglas del árbol son coherentes con los factores de riesgo descritos en la literatura.</p>
+</section>
+</section>
+<section id="seleccion-del-modelo-final">
+<h2>16. Selección del modelo final<a class="headerlink" href="#seleccion-del-modelo-final" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resumen_final</span> <span class="o">=</span> <span class="n">tabla_resultados</span><span class="p">[[</span><span class="s1">'Modelo'</span><span class="p">,</span> <span class="s1">'ROC-AUC'</span><span class="p">,</span> <span class="s1">'Recall'</span><span class="p">,</span> <span class="s1">'F1'</span><span class="p">,</span> <span class="s1">'AUC CV (media)'</span><span class="p">,</span> <span class="s1">'AUC CV (ds)'</span><span class="p">,</span>
+                                  <span class="s1">'AUC entrenamiento'</span><span class="p">,</span> <span class="s1">'Tiempo de ajuste (s)'</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">resumen_final</span><span class="p">[</span><span class="s1">'Brecha entrenamiento − prueba'</span><span class="p">]</span> <span class="o">=</span> <span class="n">resumen_final</span><span class="p">[</span><span class="s1">'AUC entrenamiento'</span><span class="p">]</span> <span class="o">-</span> <span class="n">resumen_final</span><span class="p">[</span><span class="s1">'ROC-AUC'</span><span class="p">]</span>
+<span class="n">resumen_final</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">'AUC entrenamiento'</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Modelo</th>
+      <th>ROC-AUC</th>
+      <th>Recall</th>
+      <th>F1</th>
+      <th>AUC CV (media)</th>
+      <th>AUC CV (ds)</th>
+      <th>Tiempo de ajuste (s)</th>
+      <th>Brecha entrenamiento − prueba</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>XGBoost</td>
+      <td>0.8235</td>
+      <td>0.8004</td>
+      <td>0.7644</td>
+      <td>0.8256</td>
+      <td>0.0044</td>
+      <td>1.5557</td>
+      <td>0.0239</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Random Forest</td>
+      <td>0.8209</td>
+      <td>0.7956</td>
+      <td>0.7598</td>
+      <td>0.8235</td>
+      <td>0.0037</td>
+      <td>3.7123</td>
+      <td>0.0428</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Regresión Logística</td>
+      <td>0.8174</td>
+      <td>0.7726</td>
+      <td>0.7549</td>
+      <td>0.8200</td>
+      <td>0.0036</td>
+      <td>0.1123</td>
+      <td>0.0029</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Árbol de Decisión</td>
+      <td>0.8105</td>
+      <td>0.7912</td>
+      <td>0.7508</td>
+      <td>0.8104</td>
+      <td>0.0047</td>
+      <td>0.1126</td>
+      <td>0.0133</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>KNN</td>
+      <td>0.8053</td>
+      <td>0.7900</td>
+      <td>0.7526</td>
+      <td>0.8053</td>
+      <td>0.0050</td>
+      <td>0.0225</td>
+      <td>0.0232</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Naive Bayes</td>
+      <td>0.7800</td>
+      <td>0.7181</td>
+      <td>0.7217</td>
+      <td>0.7814</td>
+      <td>0.0043</td>
+      <td>0.0211</td>
+      <td>0.0015</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Se selecciona <strong>XGBoost</strong> como modelo final porque:</p>
+<ul class="simple">
+<li><p>Tiene el mayor ROC-AUC en el conjunto de prueba (0.8235) y en validación cruzada (0.8256 ± 0.0044).</p></li>
+<li><p>Obtiene el mayor recall (80.0%) y el mayor F1 (0.764), lo que lo hace adecuado para tamizaje.</p></li>
+<li><p>Su sobreajuste es moderado (+0.024), bastante menor que el de Random Forest.</p></li>
+<li><p>Sus probabilidades están bien calibradas, por lo que pueden ajustarse a la prevalencia real.</p></li>
+<li><p>Su tiempo de entrenamiento es bajo (alrededor de 1.5 segundos).</p></li>
+</ul>
+<p>La <strong>Regresión Logística</strong> queda como una alternativa muy razonable cuando se prioriza la interpretabilidad: pierde solo 0.006 de AUC, prácticamente no se sobreajusta y sus coeficientes se explican directamente como odds ratios. Por eso el tablero GlucoRisk usa XGBoost para la predicción y la Regresión Logística para explicar el aporte de cada variable en el perfil simulado.</p>
+</section>
+<section id="conclusiones">
+<h2>17. Conclusiones<a class="headerlink" href="#conclusiones" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Con las 21 variables de la encuesta BRFSS 2015, y sin ningún examen de laboratorio, es posible distinguir a las personas con diabetes o prediabetes con un ROC-AUC de 0.82. Es un desempeño adecuado para una herramienta de tamizaje, aunque no para un diagnóstico.</p></li>
+<li><p>Los seis modelos obtienen resultados cercanos: entre el mejor (XGBoost, 0.824) y el quinto (KNN, 0.805) hay menos de dos puntos de AUC. El límite lo pone la información disponible en la encuesta, que es autorreportada y no incluye variables clínicas como la glucosa o la hemoglobina glicosilada.</p></li>
+<li><p>Los resultados son estables y generalizan bien: la validación cruzada coincide con el conjunto de prueba y ningún modelo presenta un sobreajuste grave.</p></li>
+<li><p>Las variables más influyentes son la salud general percibida, el IMC, la edad, la presión arterial alta y el colesterol alto, lo que coincide con el análisis bivariado y con los factores de riesgo reconocidos por la literatura médica.</p></li>
+<li><p>El umbral de decisión puede ajustarse según el uso: bajarlo a 0.4 aumenta la detección de casos del 80% al 87.5%, a costa de más falsas alarmas.</p></li>
+<li><p>Como el modelo se entrenó con una muestra balanceada, sus probabilidades deben ajustarse a la prevalencia real (≈ 13.9%) antes de interpretarlas como riesgo individual en la población general. Este ajuste no modifica la capacidad de discriminación del modelo.</p></li>
+<li><p><strong>Limitaciones</strong>: los datos son autorreportados y de corte transversal, por lo que el modelo identifica asociaciones y no relaciones causales. Además, la encuesta corresponde a adultos de EE. UU. en 2015, de modo que su aplicación en otras poblaciones requeriría validarlo con datos locales.</p></li>
+</ul>
+<p><strong>Referencias</strong></p>
+<ul class="simple">
+<li><p>Breiman, L. (2001). Random forests. <em>Machine Learning, 45</em>(1), 5–32.</p></li>
+<li><p>Centers for Disease Control and Prevention. (2016). <em>Behavioral Risk Factor Surveillance System: 2015 survey data and documentation</em>. U.S. Department of Health and Human Services.</p></li>
+<li><p>Chen, T., &amp; Guestrin, C. (2016). XGBoost: A scalable tree boosting system. <em>Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, 785–794.</p></li>
+<li><p>Fawcett, T. (2006). An introduction to ROC analysis. <em>Pattern Recognition Letters, 27</em>(8), 861–874.</p></li>
+<li><p>Hastie, T., Tibshirani, R., &amp; Friedman, J. (2009). <em>The elements of statistical learning</em> (2.ª ed.). Springer.</p></li>
+<li><p>Pedregosa, F., et al. (2011). Scikit-learn: Machine learning in Python. <em>Journal of Machine Learning Research, 12</em>, 2825–2830.</p></li>
+<li><p>Saerens, M., Latinne, P., &amp; Decaestecker, C. (2002). Adjusting the outputs of a classifier to new a priori probabilities: A simple procedure. <em>Neural Computation, 14</em>(1), 21–41.</p></li>
+<li><p>Teboul, A. (2021). <em>Diabetes Health Indicators Dataset</em> [Conjunto de datos]. Kaggle. <a class="reference external" href="https://www.kaggle.com/datasets/alexteboul/diabetes-health-indicators-dataset">https://www.kaggle.com/datasets/alexteboul/diabetes-health-indicators-dataset</a></p></li>
+<li><p>Xie, Z., Nikolayeva, O., Luo, J., &amp; Li, D. (2019). Building risk prediction models for type 2 diabetes using machine learning techniques. <em>Preventing Chronic Disease, 16</em>, E130.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">1. Introducción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivos">2. Objetivos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marco-teorico">3. Marco Teórico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodologia">4. Metodología</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#librerias">Librerías</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-preparacion-de-datos">5. Carga y preparación de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particion-en-entrenamiento-y-prueba">6. Partición en entrenamiento y prueba</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-de-los-modelos">7. Definición de los modelos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-y-evaluacion-en-el-conjunto-de-prueba">8. Entrenamiento y evaluación en el conjunto de prueba</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-cruzada">9. Validación cruzada</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-roc">10. Curvas ROC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices-de-confusion">11. Matrices de confusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-sobreajuste">12. Análisis de sobreajuste</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#efecto-del-umbral-de-decision">13. Efecto del umbral de decisión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calibracion-y-ajuste-a-la-prevalencia-real">14. Calibración y ajuste a la prevalencia real</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-los-modelos">15. Interpretación de los modelos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-por-permutacion-del-mejor-modelo">Importancia por permutación del mejor modelo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#odds-ratios-de-la-regresion-logistica">Odds ratios de la Regresión Logística</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primeras-reglas-del-arbol-de-decision">Primeras reglas del Árbol de Decisión</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-del-modelo-final">16. Selección del modelo final</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">17. Conclusiones</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Autor del análisis
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
